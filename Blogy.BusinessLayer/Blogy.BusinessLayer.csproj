@@ -19,4 +19,15 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Container\" />
+    <Folder Include="ErrorMessages\" />
+    <Folder Include="Logging\" />
+    <Folder Include="ValidationRules\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Blogy.EntityLayer\Blogy.EntityLayer.csproj" />
+  </ItemGroup>
+
 </Project>
