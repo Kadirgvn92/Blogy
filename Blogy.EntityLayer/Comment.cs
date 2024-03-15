@@ -9,4 +9,7 @@ public class Comment
 {
     public int CommentID { get; set; }
     public string Content { get; set; }
+    public DateTime CommentDate { get; set; }
+    public int ArticleID { get; set; }
+    public Article Article { get; set; }
 }
