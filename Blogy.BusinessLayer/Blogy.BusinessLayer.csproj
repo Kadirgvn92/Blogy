@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Blogy.DataAccessLayer\Blogy.DataAccessLayer.csproj" />
     <ProjectReference Include="..\Blogy.EntityLayer\Blogy.EntityLayer.csproj" />
   </ItemGroup>
 

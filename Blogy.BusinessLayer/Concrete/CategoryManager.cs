@@ -1,4 +1,5 @@
 ﻿using Blogy.BusinessLayer.Abstract;
+using Blogy.DataAccessLayer.Abstract;
 using Blogy.EntityLayer;
 using System;
 using System.Collections.Generic;
@@ -9,28 +10,35 @@ using System.Threading.Tasks;
 namespace Blogy.BusinessLayer.Concrete;
 public class CategoryManager : ICategoryService
 {
+    private readonly ICategoryDal _categoryDal;
+
+    public CategoryManager(ICategoryDal categoryDal)
+    {
+        _categoryDal = categoryDal;
+    }
+
     public void TDelete(int id)
     {
-        throw new NotImplementedException();
+        _categoryDal.Delete(id);
     }
 
     public List<Category> TGetAll()
     {
-        throw new NotImplementedException();
+        return _categoryDal.GetAll();
     }
 
     public Category TGetByID(int id)
     {
-        throw new NotImplementedException();
+        return _categoryDal.GetByID(id);
     }
 
     public void TInsert(Category t)
     {
-        throw new NotImplementedException();
+       _categoryDal.Insert(t);
     }
 
     public void TUpdate(Category t)
     {
-        throw new NotImplementedException();
+        _categoryDal.Update(t);
     }
 }
