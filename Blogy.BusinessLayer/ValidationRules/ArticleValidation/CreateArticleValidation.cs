@@ -11,7 +11,6 @@ public class CreateArticleValidation : AbstractValidator<Article>
 {
     public CreateArticleValidation()
     {
-        RuleFor(x => x.CategoryID).NotEmpty().WithMessage("Lütfen makale için bir kategori seçin");
         RuleFor(x => x.Title).NotEmpty().WithMessage("Lütfen makale için bir başlık girin")
             .MinimumLength(5).WithMessage("Lütfen başlık kısmına en az 5 karakter girin")
             .MaximumLength(100).WithMessage("Lütfen başlık kısmına en fazla 10 karaker girin");
