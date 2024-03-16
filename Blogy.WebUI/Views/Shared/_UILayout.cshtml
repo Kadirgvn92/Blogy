@@ -1,0 +1,21 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+
+@await Html.PartialAsync("~/Views/LayoutPartials/UILayoutPartial/_UIHeadPartial.cshtml")
+
+<body>
+	@await Html.PartialAsync("~/Views/LayoutPartials/UILayoutPartial/_UIHeaderPartial.cshtml")
+	
+	@await Html.PartialAsync("~/Views/LayoutPartials/UILayoutPartial/_UINavbarPartial.cshtml")
+	
+	@RenderBody()
+
+	@await Html.PartialAsync("~/Views/LayoutPartials/UILayoutPartial/_UIFooterPartial.cshtml")
+
+  </body>
+  </html>
