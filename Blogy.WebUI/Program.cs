@@ -1,4 +1,5 @@
 using Blogy.DataAccessLayer.Context;
+using Blogy.BusinessLayer.Container;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,7 +7,9 @@ builder.Services.AddDbContext<BlogyDbContext>();
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.ContainerDependencies();
 
+builder.Services.RegisterValidator();
 
 var app = builder.Build();
 
@@ -26,5 +29,14 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
+});
+
 
 app.Run();

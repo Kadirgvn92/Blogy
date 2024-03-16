@@ -7,6 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\AdminLTE-3.2.0\.github\codeql\codeql-config.yml" />
+    <None Include="wwwroot\AdminLTE-3.2.0\.github\CONTRIBUTING.md" />
+    <None Include="wwwroot\AdminLTE-3.2.0\.github\dependabot.yml" />
+    <None Include="wwwroot\AdminLTE-3.2.0\.github\ISSUE_TEMPLATE\bug-report-for-adminlte-v3.1-x.md" />
+    <None Include="wwwroot\AdminLTE-3.2.0\.github\ISSUE_TEMPLATE\feature-request-for-adminlte-v4-x.md" />
+    <None Include="wwwroot\AdminLTE-3.2.0\.github\workflows\ci.yml" />
+    <None Include="wwwroot\AdminLTE-3.2.0\.github\workflows\codeql.yml" />
+    <None Include="wwwroot\AdminLTE-3.2.0\.github\workflows\docs.yml" />
+    <None Include="wwwroot\AdminLTE-3.2.0\.github\workflows\lint.yml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.9.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.28" />
@@ -23,8 +35,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Blogy.BusinessLayer\Blogy.BusinessLayer.csproj" />
     <ProjectReference Include="..\Blogy.DataAccessLayer\Blogy.DataAccessLayer.csproj" />
     <ProjectReference Include="..\Blogy.EntityLayer\Blogy.EntityLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
 
 </Project>
