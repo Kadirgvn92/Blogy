@@ -1,0 +1,6 @@
+﻿
+
+-- Categoriye göre listeleme yapılacak
+-- Listeleme sonucu hangi articleıd basılırsa ona gidilecek 
+-- sidebar düzenlenecek viewcomponentler ile 
+-- commentler düzenlenecek
