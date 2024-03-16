@@ -22,6 +22,16 @@ public class ArticleManager : IArticleService
        return _articleDal.GetAll();
     }
 
+	public List<Article> TGetAllArticles()
+	{
+		return _articleDal.GetAllArticles();
+	}
+
+    public Article TGetArticle(int id)
+    {
+        return _articleDal.GetArticle(id);
+    }
+
     public Article TGetByID(int id)
     {
         return _articleDal.GetByID(id);

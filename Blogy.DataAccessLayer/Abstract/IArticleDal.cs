@@ -8,4 +8,6 @@ using System.Threading.Tasks;
 namespace Blogy.DataAccessLayer.Abstract;
 public interface IArticleDal : IGenericDal<Article>
 {
+    public List<Article> GetAllArticles();
+    public Article GetArticle(int id);
 }
