@@ -17,6 +17,11 @@ public class CategoryManager : ICategoryService
         _categoryDal = categoryDal;
     }
 
+    public List<Category> TGetCategories()
+    {
+        return _categoryDal.GetCategories();
+    }
+
     public void TDelete(int id)
     {
         _categoryDal.Delete(id);

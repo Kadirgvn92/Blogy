@@ -8,4 +8,5 @@ using System.Threading.Tasks;
 namespace Blogy.BusinessLayer.Abstract;
 public interface ICategoryService : IGenericService<Category>
 {
+    public List<Category> TGetCategories();
 }

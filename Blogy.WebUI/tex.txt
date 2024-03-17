@@ -1,6 +1,7 @@
 ﻿
 
 -- Categoriye göre listeleme yapılacak
--- Listeleme sonucu hangi articleıd basılırsa ona gidilecek 
--- sidebar düzenlenecek viewcomponentler ile 
+-- Listeleme sonucu hangi articleıd basılırsa ona gidilecek - Tamamlandı 
+-- sidebar düzenlenecek viewcomponentler ile - Tamamlandı
 -- commentler düzenlenecek
+-- Taglar halledilecek

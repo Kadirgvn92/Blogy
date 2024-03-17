@@ -8,4 +8,5 @@ using System.Threading.Tasks;
 namespace Blogy.DataAccessLayer.Abstract;
 public interface ICategoryDal : IGenericDal<Category>
 {
+    public List<Category> GetCategories();
 }

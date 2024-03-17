@@ -32,13 +32,13 @@
                     <p>@Model.SecondSection</p>
                     <div class="row my-4">
                         <div class="col-md-12 mb-4">
-                            <img src="images/hero_1.jpg" alt="Image placeholder" class="img-fluid rounded">
+                            <img src="/blogy-1.0.0/images/hero_1.jpg" alt="Image placeholder" class="img-fluid rounded">
                         </div>
                         <div class="col-md-6 mb-4">
-                            <img src="images/img_2_horizontal.jpg" alt="Image placeholder" class="img-fluid rounded">
+                            <img src="/blogy-1.0.0/images/img_2_horizontal.jpg" alt="Image placeholder" class="img-fluid rounded">
                         </div>
                         <div class="col-md-6 mb-4">
-                            <img src="images/img_3_horizontal.jpg" alt="Image placeholder" class="img-fluid rounded">
+                            <img src="/blogy-1.0.0/images/img_3_horizontal.jpg" alt="Image placeholder" class="img-fluid rounded">
                         </div>
                     </div>
                     <p>@Model.ThirdSection</p>
@@ -48,8 +48,8 @@
 
                 <div class="pt-5">
                     <p>
-                        Categories:
-                        <a href="#"></a>
+                        Kategori : 
+                        <a href="/Category/Index/@Model.CategoryID">@Model.Categories.CategoryName</a>
                         Tags:
                         <a href="#">#manila</a>,
                         <a href="#">#asia</a>
@@ -183,11 +183,11 @@
                 <!-- END sidebar-box -->
                 <div class="sidebar-box">
                     <div class="bio text-center">
-                        <img src="images/person_2.jpg" alt="Image Placeholder" class="img-fluid mb-3">
+                        <img src="@Model.Writer.ImageUrl" alt="Image Placeholder" class="img-fluid mb-3">
                         <div class="bio-body">
-                            <h2>Hannah Anderson</h2>
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem facilis sunt repellendus excepturi beatae porro debitis voluptate nulla quo veniam fuga sit molestias minus.</p>
-                            <p><a href="#" class="btn btn-primary btn-sm rounded px-2 py-2">Read my bio</a></p>
+                            <h2>@Model.Writer.Name</h2>
+                            <p class="mb-4">@Model.Writer.Description</p>
+                            <p><a href="#" class="btn btn-primary btn-sm rounded px-2 py-2">Biyografimi Oku..</a></p>
                             <p class="social">
                                 <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
                                 <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>
@@ -198,58 +198,9 @@
                     </div>
                 </div>
                 <!-- END sidebar-box -->
-                <div class="sidebar-box">
-                    <h3 class="heading">Popular Posts</h3>
-                    <div class="post-entry-sidebar">
-                        <ul>
-                            <li>
-                                <a href="">
-                                    <img src="images/img_1_sq.jpg" alt="Image placeholder" class="me-4 rounded">
-                                    <div class="text">
-                                        <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                                        <div class="post-meta">
-                                            <span class="mr-2">March 15, 2018 </span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="images/img_2_sq.jpg" alt="Image placeholder" class="me-4 rounded">
-                                    <div class="text">
-                                        <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                                        <div class="post-meta">
-                                            <span class="mr-2">March 15, 2018 </span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="images/img_3_sq.jpg" alt="Image placeholder" class="me-4 rounded">
-                                    <div class="text">
-                                        <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                                        <div class="post-meta">
-                                            <span class="mr-2">March 15, 2018 </span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                @await Component.InvokeAsync("_UIArticlePopularPartial")
                 <!-- END sidebar-box -->
-
-                <div class="sidebar-box">
-                    <h3 class="heading">Categories</h3>
-                    <ul class="categories">
-                        <li><a href="#">Food <span>(12)</span></a></li>
-                        <li><a href="#">Travel <span>(22)</span></a></li>
-                        <li><a href="#">Lifestyle <span>(37)</span></a></li>
-                        <li><a href="#">Business <span>(42)</span></a></li>
-                        <li><a href="#">Adventure <span>(14)</span></a></li>
-                    </ul>
-                </div>
+                @await Component.InvokeAsync("_UICategoryPartial")
                 <!-- END sidebar-box -->
 
                 <div class="sidebar-box">
