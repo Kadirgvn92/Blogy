@@ -17,7 +17,7 @@ public class _UIDefaultFourthPartial : ViewComponent
 		var values = _articleService.TGetArticleBySecondCategory();
 		var cat = values.FirstOrDefault(x => x.CategoryID == 2);
 		ViewBag.Category = cat.Categories.CategoryName;
-
+		ViewBag.CategoryID = cat.Categories.CategoryID;
 		return View(values);
 	}
 }

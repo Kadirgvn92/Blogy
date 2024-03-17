@@ -9,5 +9,6 @@ public class Category
 {
     public int CategoryID { get; set; }
     public string? CategoryName { get; set; }
+    public string? CategoryImageUrl { get; set; }
     public List<Article> Articles { get; set; }
 }

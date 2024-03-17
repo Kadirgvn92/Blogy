@@ -7,7 +7,7 @@
 			<div class="col-md-4">
 				@foreach (var item in Model.OrderBy(x => x.CreatedDate).Take(2))
 				{
-					<a href="single.html" class="h-entry mb-0 mt-3 v-height gradient">
+					<a href="/Article/Index/@item.ArticleID" class="h-entry mb-0 mt-3 v-height gradient">
 
 						<div class="featured-img" style="background-image: url('@item.CoverImageUrl');"></div>
 
@@ -21,7 +21,7 @@
 			<div class="col-md-4 mb-0 mt-3">
 				@foreach (var item in Model.OrderByDescending(x => x.WriterID).Take(1))
 				{
-					<a href="single.html" class="h-entry mb-0 img-5 h-100 gradient">
+					<a href="/Article/Index/@item.ArticleID" class="h-entry mb-0 img-5 h-100 gradient">
 
 						<div class="featured-img" style="background-image: url('@item.CoverImageUrl');"></div>
 
@@ -36,7 +36,7 @@
 			<div class="col-md-4">
 				@foreach (var item in Model.OrderByDescending(z => z.Writer.Name).Take(2))
 				{
-					<a href="single.html" class="h-entry mb-0 mt-3 v-height gradient">
+					<a href="/Article/Index/@item.ArticleID" class="h-entry mb-0 mt-3 v-height gradient">
 
 						<div class="featured-img" style="background-image: url('@item.CoverImageUrl');"></div>
 

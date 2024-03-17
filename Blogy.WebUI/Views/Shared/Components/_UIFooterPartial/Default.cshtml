@@ -1,0 +1,26 @@
+﻿
+@model List<Article>
+
+<div class="col-lg-4">
+	<div class="widget">
+		<h3 class="mb-4">Recent Post Entry</h3>
+		<div class="post-entry-footer">
+			<ul>
+				@foreach (var item in Model.OrderByDescending(x => x.CreatedDate).Take(3))
+				{
+					<li>
+						<a href="/Article/Index/@item.ArticleID">
+							<img src="@item.CoverImageUrl" alt="Image placeholder" class="me-4 rounded">
+							<div class="text">
+								<h4>@item.Title</h4>
+								<div class="post-meta">
+									<span class="mr-2">@item.CreatedDate.ToString("dddd, dd MMMM yyyy") </span>
+								</div>
+							</div>
+						</a>
+					</li>
+				}
+			</ul>
+		</div>
+	</div> <!-- /.widget -->
+</div>

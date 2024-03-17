@@ -20,6 +20,7 @@ public class _UIDefaultSecondPartial : ViewComponent
 		var values = _articleService.TGetArticleByFirstCategory();
 		var cat = values.FirstOrDefault(x => x.CategoryID == 1);
 		ViewBag.Category = cat.Categories.CategoryName;	
+		ViewBag.CategoryID = cat.Categories.CategoryID;
 		return View(values);
 	}
 }

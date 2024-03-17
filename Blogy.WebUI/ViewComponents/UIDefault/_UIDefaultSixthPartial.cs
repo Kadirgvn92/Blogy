@@ -18,6 +18,7 @@ public class _UIDefaultSixthPartial :ViewComponent
 		var values = _articleService.TGetArticleByFourthCategory();
 		var cat = values.FirstOrDefault(x => x.CategoryID == 4);
 		ViewBag.Category = cat.Categories.CategoryName;
+		ViewBag.CategoryID = cat.Categories.CategoryID;
 		return View(values);	
 	}
 }
