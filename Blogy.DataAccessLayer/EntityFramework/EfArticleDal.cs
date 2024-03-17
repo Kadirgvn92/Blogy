@@ -34,28 +34,28 @@ public class EfArticleDal : GenericRepository<Article>, IArticleDal
     public List<Article> GetArticleByFirstCategory()
     {
         using var context = new BlogyDbContext();
-        var values = context.Articles.Where(x => x.CategoryID == 1).ToList();
+        var values = context.Articles.Where(x => x.CategoryID == 1).Include(x => x.Categories).ToList();
         return values;
     }
 
     public List<Article> GetArticleByFourthCategory()
     {
         using var context = new BlogyDbContext();
-        var values = context.Articles.Where(x => x.CategoryID == 2).ToList();
+        var values = context.Articles.Where(x => x.CategoryID == 4).Include(x => x.Categories).ToList();
         return values;
     }
 
     public List<Article> GetArticleBySecondCategory()
     {
         using var context = new BlogyDbContext();
-        var values = context.Articles.Where(x => x.CategoryID == 3).ToList();
+        var values = context.Articles.Where(x => x.CategoryID == 2).Include(x => x.Categories).ToList();
         return values;
     }
 
     public List<Article> GetArticleByThirdCategory()
     {
         using var context = new BlogyDbContext();
-        var values = context.Articles.Where(x => x.CategoryID == 4).ToList();
+        var values = context.Articles.Where(x => x.CategoryID == 3).Include(x => x.Categories).Include(x => x.Writer).ToList();
         return values;
     }
 }

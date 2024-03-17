@@ -14,7 +14,9 @@ public class _UIDefaultFifthPartial : ViewComponent
 
     public IViewComponentResult Invoke()
 	{
-        var values = _articleService.TGetAllArticles();
+        var values = _articleService.TGetArticleByThirdCategory();
+		var cat = values.FirstOrDefault(x => x.CategoryID == 3);
+		ViewBag.Category = cat.Categories.CategoryName;
 		return View(values);
 	}
 }

@@ -17,7 +17,9 @@ public class _UIDefaultSecondPartial : ViewComponent
 
 	public IViewComponentResult Invoke()
 	{
-		var values = _articleService.TGetArticleBySecondCategory();
+		var values = _articleService.TGetArticleByFirstCategory();
+		var cat = values.FirstOrDefault(x => x.CategoryID == 1);
+		ViewBag.Category = cat.Categories.CategoryName;	
 		return View(values);
 	}
 }
