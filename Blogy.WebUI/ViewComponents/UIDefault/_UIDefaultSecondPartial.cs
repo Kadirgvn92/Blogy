@@ -1,11 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Blogy.BusinessLayer.Abstract;
+using Blogy.DataAccessLayer.Context;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Blogy.WebUI.ViewComponents.UIDefault;
 
-public class _UIDefaultSecondPartial :ViewComponent
+public class _UIDefaultSecondPartial : ViewComponent
 {
+	private readonly IArticleService _articleService;
+	private readonly ICategoryService _categoryService;
+
+	public _UIDefaultSecondPartial(IArticleService articleService, ICategoryService categoryService)
+	{
+		_articleService = articleService;
+		_categoryService = categoryService;
+	}
+
 	public IViewComponentResult Invoke()
 	{
-		return View();
+		var values = _articleService.TGetArticleBySecondCategory();
+		return View(values);
 	}
 }

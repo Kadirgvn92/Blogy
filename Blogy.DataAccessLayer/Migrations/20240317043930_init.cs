@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Blogy.DataAccessLayer.Migrations
 {
-    public partial class inti : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -64,40 +64,23 @@ namespace Blogy.DataAccessLayer.Migrations
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CoverImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    WriterID = table.Column<int>(type: "int", nullable: false)
+                    WriterID = table.Column<int>(type: "int", nullable: false),
+                    CategoryID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Articles", x => x.ArticleID);
                     table.ForeignKey(
+                        name: "FK_Articles_Categories_CategoryID",
+                        column: x => x.CategoryID,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Articles_Writers_WriterID",
                         column: x => x.WriterID,
                         principalTable: "Writers",
                         principalColumn: "WriterID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ArticleCategory",
-                columns: table => new
-                {
-                    ArticlesArticleID = table.Column<int>(type: "int", nullable: false),
-                    CategoriesCategoryID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ArticleCategory", x => new { x.ArticlesArticleID, x.CategoriesCategoryID });
-                    table.ForeignKey(
-                        name: "FK_ArticleCategory_Articles_ArticlesArticleID",
-                        column: x => x.ArticlesArticleID,
-                        principalTable: "Articles",
-                        principalColumn: "ArticleID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ArticleCategory_Categories_CategoriesCategoryID",
-                        column: x => x.CategoriesCategoryID,
-                        principalTable: "Categories",
-                        principalColumn: "CategoryID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -123,9 +106,9 @@ namespace Blogy.DataAccessLayer.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ArticleCategory_CategoriesCategoryID",
-                table: "ArticleCategory",
-                column: "CategoriesCategoryID");
+                name: "IX_Articles_CategoryID",
+                table: "Articles",
+                column: "CategoryID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Articles_WriterID",
@@ -141,19 +124,16 @@ namespace Blogy.DataAccessLayer.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ArticleCategory");
-
-            migrationBuilder.DropTable(
                 name: "Comments");
 
             migrationBuilder.DropTable(
                 name: "Tags");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Articles");
 
             migrationBuilder.DropTable(
-                name: "Articles");
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Writers");

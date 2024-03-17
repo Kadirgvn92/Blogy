@@ -12,6 +12,11 @@ public class ArticleManager : IArticleService
         _articleDal = articleDal;
     }
 
+    public List<Article> TGetArticleByFirstCategory()
+    {
+        return _articleDal.GetArticleByFirstCategory();
+    }
+
     public void TDelete(int id)
     {
         _articleDal.Delete(id);
@@ -45,5 +50,20 @@ public class ArticleManager : IArticleService
     public void TUpdate(Article t)
     {
         _articleDal.Update(t);
+    }
+
+    public List<Article> TGetArticleBySecondCategory()
+    {
+        return _articleDal.GetArticleBySecondCategory();
+    }
+
+    public List<Article> TGetArticleByThirdCategory()
+    {
+       return _articleDal.GetArticleByThirdCategory();
+    }
+
+    public List<Article> TGetArticleByFourthCategory()
+    {
+       return _articleDal.GetArticleByFourthCategory();
     }
 }

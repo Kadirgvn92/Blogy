@@ -10,4 +10,8 @@ public interface IArticleDal : IGenericDal<Article>
 {
     public List<Article> GetAllArticles();
     public Article GetArticle(int id);
+    public List<Article> GetArticleByFirstCategory();
+    public List<Article> GetArticleBySecondCategory();
+    public List<Article> GetArticleByThirdCategory();
+    public List<Article> GetArticleByFourthCategory();
 }
