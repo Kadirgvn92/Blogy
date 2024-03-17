@@ -11,9 +11,11 @@ public class CategoryController : Controller
 		_articleService = articleService;
 	}
 
-	public IActionResult Index()
+	public IActionResult Index(int id)
     {
-		var values = _articleService.TGetAllArticles();
+		var values = _articleService.TGetArticleByCategory(id);
+		var cat = values.FirstOrDefault(x => x.CategoryID == id);
+		ViewBag.Category = cat.Categories.CategoryName;
         return View(values);
     }
 }

@@ -1,21 +1,23 @@
-﻿@model List<Article>
+﻿@using PagedList
+@using PagedList.Mvc
+
+@model List<Article>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_UILayout.cshtml";
 }
 
-
 <div class="section search-result-wrap">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="heading">Category: Business</div>
+                <div class="heading">Kategori : @ViewBag.Category</div>
             </div>
         </div>
         <div class="row posts-entry">
             <div class="col-lg-8">
-                @foreach (var item in Model)
+                @foreach (var item in Model.Take(5).OrderBy(x => x.CreatedDate))
                 {
                     <div class="blog-entry d-flex blog-entry-search-item">
                         <div>
@@ -38,12 +40,11 @@
                             <a href="#">2</a>
                             <a href="#">3</a>
                             <a href="#">4</a>
-                            <span>...</span>
+                            ...
                             <a href="#">15</a>
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <div class="col-lg-4 sidebar">

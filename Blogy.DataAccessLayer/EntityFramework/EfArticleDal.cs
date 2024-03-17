@@ -31,6 +31,13 @@ public class EfArticleDal : GenericRepository<Article>, IArticleDal
         return values;
     }
 
+    public List<Article> GetArticleByCategory(int id)
+    {
+        using var context = new BlogyDbContext();
+        var values = context.Articles.Include(x => x.Writer).Include(x => x.Categories).Where(x => x.CategoryID == id).ToList();
+        return values;  
+    }
+
     public List<Article> GetArticleByFirstCategory()
     {
         using var context = new BlogyDbContext();

@@ -14,4 +14,5 @@ public interface IArticleService : IGenericService<Article>
     public List<Article> TGetArticleBySecondCategory();
     public List<Article> TGetArticleByThirdCategory();
     public List<Article> TGetArticleByFourthCategory();
+    public List<Article> TGetArticleByCategory(int id);
 }

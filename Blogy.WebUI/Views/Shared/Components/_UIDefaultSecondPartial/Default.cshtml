@@ -20,7 +20,7 @@
 								<a href="/Article/Index/@item.ArticleID" class="img-link">
 									<img src="@item.CoverImageUrl" alt="Image" class="img-fluid">
 								</a>
-								<span class="date">@item.CreatedDate.ToShortDateString()</span>
+								<span class="date">@item.CreatedDate.ToString("dddd, dd MMMM yyyy")</span>
 								<h2><a href="/Article/Index/@item.ArticleID">@item.Title</a></h2>
 								<p>@item.Description</p>
 								<p><a href="/Article/Index/@item.ArticleID" class="btn btn-sm btn-outline-primary">Daha Fazla</a></p>
