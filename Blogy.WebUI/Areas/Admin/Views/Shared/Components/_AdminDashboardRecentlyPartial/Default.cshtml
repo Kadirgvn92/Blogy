@@ -1,0 +1,48 @@
+﻿
+@model List<Article>
+
+<div class="col-md-6">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Son Eklenen Postlar</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body p-0">
+            <ul class="products-list product-list-in-card pl-2 pr-2">
+                @foreach(var item in Model.OrderBy(x => x.CreatedDate).Take(6))
+                {
+                    <li class="item">
+                        <div class="product-img">
+                            <img src="@item.CoverImageUrl" alt="Product Image" class="img-size-50">
+                        </div>
+                        <div class="product-info">
+                            <a href="javascript:void(0)" class="product-title">
+                                @item.Title
+                                <span class="badge badge-warning float-right">@item.Categories.CategoryName</span>
+                            </a>
+                            <span class="product-description">
+                                @item.CreatedDate.ToString("dddd, dd MMMM yyyy")
+                            </span>
+                        </div>
+                    </li>
+                }
+                <!-- /.item -->
+            </ul>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer text-center">
+            <a href="javascript:void(0)" class="uppercase">Tüm postları görüntüle</a>
+        </div>
+        <!-- /.card-footer -->
+    </div>
+    <!-- /.card -->
+</div>
