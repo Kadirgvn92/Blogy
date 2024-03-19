@@ -1,6 +1,5 @@
 ﻿using Blogy.BusinessLayer.Abstract;
 using Blogy.BusinessLayer.Concrete;
-using Blogy.BusinessLayer.ValidationRules.ArticleValidation;
 using Blogy.DataAccessLayer.Abstract;
 using Blogy.DataAccessLayer.EntityFramework;
 using FluentValidation;
@@ -30,9 +29,5 @@ public static class Extensions
 
         services.AddScoped<IWriterDal, EfWriterDal>();
         services.AddScoped<IWriterService, WriterManager>();
-    }
-    public static void RegisterValidator(this IServiceCollection services)
-    {
-        services.AddValidatorsFromAssemblyContaining<CreateArticleValidation>();
     }
 }

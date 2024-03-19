@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.28" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.28" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.28" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.28">
       <PrivateAssets>all</PrivateAssets>
@@ -22,6 +24,7 @@
   <ItemGroup>
     <Folder Include="Concrete\" />
     <Folder Include="UnitOfWork\" />
+    <Folder Include="ValidationRules\" />
   </ItemGroup>
 
   <ItemGroup>
