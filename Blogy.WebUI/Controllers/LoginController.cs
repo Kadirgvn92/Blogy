@@ -1,9 +1,11 @@
 ﻿using Blogy.EntityLayer;
 using Blogy.WebUI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blogy.WebUI.Controllers;
+[AllowAnonymous]
 public class LoginController : Controller
 {
     private readonly UserManager<AppUser> _userManager;
@@ -74,8 +76,11 @@ public class LoginController : Controller
                 ViewBag.ErrorMessage = "Geçersiz Kullanıcı adı veya Şifre. Lütfen tekrar deneyiniz.";
                 return View();
             }
+        }else
+        {
+            ViewBag.ErrorMessage = "Lütfen giriş bilgilerinizi doğru şekilde doldurunuz.";
+            return View();
         }
-        return View();
     }
     [HttpGet]
     public async Task<IActionResult> LogOut()

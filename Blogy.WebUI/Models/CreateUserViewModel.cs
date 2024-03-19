@@ -8,4 +8,5 @@ public class CreateUserViewModel
     public string Mail { get; set; }
     public string Password { get; set; }
     public string SuccessMessage { get; set; }
+    public bool AcceptTerms { get; set; }
 }

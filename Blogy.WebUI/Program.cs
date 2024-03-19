@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Identity;
 using Blogy.BusinessLayer.ValidationRules.ArticleValidation;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Blogy.BusinessLayer.ValidationRules.RegisterValidation;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +28,19 @@ builder.Services.AddFluentValidationAutoValidation(config =>
 
 builder.Services.AddValidatorsFromAssemblyContaining<CreateArticleValidation>();
 
+builder.Services.AddMvc(config =>
+{
+    var policy = new AuthorizationPolicyBuilder()
+    .RequireAuthenticatedUser()
+    .Build();
+    config.Filters.Add(new AuthorizeFilter(policy));
+});
+
+builder.Services.ConfigureApplicationCookie(opt =>
+{
+    opt.LoginPath = "/Login/SignIn/";
+});
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -38,7 +54,11 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+
+app.UseAuthentication();
+
 app.UseAuthorization();
+
 
 app.MapControllerRoute(
     name: "default",

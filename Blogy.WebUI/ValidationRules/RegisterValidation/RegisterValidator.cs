@@ -11,6 +11,10 @@ public class RegisterValidator : AbstractValidator<CreateUserViewModel>
 {
     public RegisterValidator()
     {
+        RuleFor(x => x.AcceptTerms)
+             .Must(x => x)
+             .WithMessage("Şartları kabul etmelisiniz.");
+
         RuleFor(x => x.Name).NotEmpty().WithMessage("Ad alanı boş geçilemez");
         RuleFor(x => x.Surname).NotEmpty().WithMessage("Soyad alanı boş geçilemez");
         RuleFor(x => x.Mail).NotEmpty().WithMessage("Mail alanı boş geçilemez");
