@@ -63,11 +63,17 @@ Bu proje, bir blog web sitesinin temel işlevselliğini sağlar. Ana bölümler 
 
 Aşağıda, projenin bazı ekran görüntüleri bulunmaktadır:
 
-![Ekran Görüntüsü 1](/path/to/screenshot1.png)
-![Ekran Görüntüsü 2](/path/to/screenshot2.png)
-![Ekran Görüntüsü 3](/path/to/screenshot3.png)
-![Ekran Görüntüsü 4](/path/to/screenshot4.png)
+<img src="https://github.com/Kadirgvn92/Blogy/blob/master/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-03-20%20105240.png" alt="alt text">
+<br/>
+<img src="https://github.com/Kadirgvn92/Blogy/blob/master/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-03-20%20105250.png" alt="alt text">
+<br/>
+<img src="https://github.com/Kadirgvn92/Blogy/blob/master/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-03-20%20105303.png" alt="alt text">
+<br/>
 
----
-
-Bu README dosyası, projenin nasıl geliştirildiğini, hangi teknolojilerin kullanıldığını ve projenin temel işlevselliğini açıklamak için hazırlanmıştır. Ayrıca, projenin kurulumu ve çalıştırılması için gerekli adımlar da belirtilmiştir.
+<img src="https://github.com/Kadirgvn92/Blogy/blob/master/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-03-20%20105320.png" alt="alt text">
+<br/>
+<img src="https://github.com/Kadirgvn92/Blogy/blob/master/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-03-20%20105418.png" alt="alt text">
+<br/>
+<img src="https://github.com/Kadirgvn92/Blogy/blob/master/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-03-20%20105430.png" alt="alt text">
+<br/>
+<img src="https://github.com/Kadirgvn92/Blogy/blob/master/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-03-20%20105500.png" alt="alt text">
