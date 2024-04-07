@@ -15,12 +15,12 @@
         </div>
         <div class="row posts-entry">
             <div class="col-lg-8">
-                @foreach (var item in Model.Take(5).OrderBy(x => x.CreatedDate))
+                @foreach (var item in Model.OrderByDescending(x => x.CreatedDate).Take(5))
                 {
                     <div class="blog-entry d-flex blog-entry-search-item">
                         <div>
                             <a href="/Article/Index/@item.ArticleID" class="img-link p-0">
-                                <img src="@item.CoverImageUrl" alt="Image" height="230px" width="230px" class="img-fluid">
+                                <img src="/articleImages/@item.CoverImageUrl" alt="Image" style="object-fit:fill" height="180px" width="250px">
                             </a>
                         </div>
                         <div>

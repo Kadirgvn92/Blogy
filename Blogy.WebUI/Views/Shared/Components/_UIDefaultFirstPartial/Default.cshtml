@@ -9,7 +9,7 @@
 				{
 					<a href="/Article/Index/@item.ArticleID" class="h-entry mb-0 mt-3 v-height gradient">
 
-						<div class="featured-img" style="background-image: url('@item.CoverImageUrl');"></div>
+						<div class="featured-img" style="background-image: url('/articleImages/@item.CoverImageUrl');"></div>
 
 						<div class="text">
 							<span class="date">@item.CreatedDate.ToString("dddd, dd MMMM yyyy")</span>
@@ -19,11 +19,11 @@
 				}
 			</div>
 			<div class="col-md-4 mb-0 mt-3">
-				@foreach (var item in Model.OrderByDescending(x => x.WriterID).Take(1))
+				@foreach (var item in Model.OrderByDescending(x => x.CreatedDate).OrderBy(x => x.WriterID).Take(1))
 				{
 					<a href="/Article/Index/@item.ArticleID" class="h-entry mb-0 img-5 h-100 gradient">
 
-						<div class="featured-img" style="background-image: url('@item.CoverImageUrl');"></div>
+						<div class="featured-img" style="background-image: url('/articleImages/@item.CoverImageUrl');"></div>
 
 						<div class="text">
 							<span class="date">@item.CreatedDate.ToString("dddd, dd MMMM yyyy")</span>
@@ -34,11 +34,11 @@
 				
 			</div>
 			<div class="col-md-4">
-				@foreach (var item in Model.OrderByDescending(z => z.Writer.Name).Take(2))
+				@foreach (var item in Model.OrderByDescending(z => z.CreatedDate).OrderBy(x => x.Writer.Name).Take(2))
 				{
 					<a href="/Article/Index/@item.ArticleID" class="h-entry mb-0 mt-3 v-height gradient">
 
-						<div class="featured-img" style="background-image: url('@item.CoverImageUrl');"></div>
+						<div class="featured-img" style="background-image: url('/articleImages/@item.CoverImageUrl');"></div>
 
 						<div class="text">
 							<span class="date">@item.CreatedDate.ToString("dddd, dd MMMM yyyy")</span>

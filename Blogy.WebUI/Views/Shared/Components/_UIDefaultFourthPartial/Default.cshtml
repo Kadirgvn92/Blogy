@@ -12,13 +12,13 @@
 		<div class="row g-3">
 			<div class="col-md-9 order-md-2">
 				<div class="row g-3">
-					@foreach(var item in Model.Take(2).OrderBy(x => x.CreatedDate))
+					@foreach (var item in Model.OrderByDescending(x => x.CreatedDate).Take(2))
 					{
 
 						<div class="col-md-6">
 							<div class="blog-entry">
 								<a href="/Article/Index/@item.ArticleID" class="img-link">
-									<img src="@item.CoverImageUrl" alt="Image" class="img-fluid">
+									<img src="/articleImages/@item.CoverImageUrl" alt="Image" width="450px" height="350px">
 								</a>
 								<span class="date">@item.CreatedDate.ToString("dddd, dd MMMM yyyy")</span>
 								<h2><a href="/Article/Index/@item.ArticleID">@item.Title</a></h2>
@@ -31,7 +31,7 @@
 			</div>
 			<div class="col-md-3">
 				<ul class="list-unstyled blog-entry-sm">
-					@foreach(var item in Model.Take(3).OrderByDescending(x => x.WriterID))
+					@foreach (var item in Model.OrderByDescending(x => x.WriterID).Take(3))
 					{
 						<li>
 							<span class="date">@item.CreatedDate.ToString("dddd, dd MMMM yyyy")</span>

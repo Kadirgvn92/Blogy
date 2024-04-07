@@ -15,13 +15,12 @@
                             <div class="card-title">Bloglar (@Model.TotalArticles)</div>
                         </div>
                         <div class="card-body">
-                            <div class="card-sub">
-                                Blog kısmını bu sayfada görüntüleyebilir veya güncelleyebilirsiniz.
-                            </div>
-                            <br />
+                            
                             <div class="card-body p-0">
                                 <div class="mailbox-controls">
-
+                                    <div class="card-sub">
+                                        Blog kısmını bu sayfada görüntüleyebilir veya güncelleyebilirsiniz.
+                                    </div>
                                     <div class="float-right">
                                         @Model.PageInfo.CurrentPage - @Model.PageInfo.ItemsPerPage / @Model.PageInfo.TotalPages()
                                         <div class="btn-group">
@@ -56,7 +55,7 @@
                                             <tr>
                                                 <td class="align-middle" width="150px">
                                                     <div>
-                                                        <img src="/articleImages/@item.CoverImageUrl" class="rounded me-3" style="width:100px;height:100px;">
+                                                        <img src="/articleImages/@item.CoverImageUrl" class="rounded me-3" style="width:100px;height:75px;">
                                                     </div>
                                                 </td>
                                                 <td class="align-middle" >
@@ -80,7 +79,7 @@
                                 </table>
                                 <br />
                                 <div>
-                                    <a href="/Admin/Article/AddArticle/" class="btn btn-primary">Yeni Blog Oluştur</a>
+                                    <a href="/Admin/Blog/CreateBlog/" class="btn btn-primary">Yeni Blog Oluştur</a>
                                 </div>
                             </div>
                         </div>

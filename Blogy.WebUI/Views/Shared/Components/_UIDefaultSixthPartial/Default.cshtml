@@ -13,10 +13,10 @@
         <div class="row align-items-stretch retro-layout-alt">
 
             <div class="col-md-5 order-md-2">
-                @foreach (var item in Model.OrderBy(x => x.WriterID).Take(1))
+                @foreach (var item in Model.OrderByDescending(x => x.CreatedDate).Take(1))
                 {
                     <a href="/Article/Index/@item.ArticleID" class="hentry img-1 h-100 gradient">
-                        <div class="featured-img" style="background-image: url('@item.CoverImageUrl');"></div>
+                        <div class="featured-img" style="background-image: url('/articleImages/@item.CoverImageUrl');"></div>
                         <div class="text">
                             <span>@item.CreatedDate.ToString("dddd, dd MMMM yyyy")</span>
                             <h2>@item.Title</h2>
@@ -30,7 +30,7 @@
                 @foreach (var item in Model.OrderByDescending(x => x.ArticleID).Take(1))
                 {
                     <a href="/Article/Index/@item.ArticleID" class="hentry img-2 v-height mb30 gradient">
-                        <div class="featured-img" style="background-image: url('@item.CoverImageUrl');"></div>
+                        <div class="featured-img" style="background-image: url('/articleImages/@item.CoverImageUrl');"></div>
                         <div class="text text-sm">
                             <span>@item.CreatedDate.ToString("dddd, dd MMMM yyyy")</span>
                             <h2>@item.Title</h2>
@@ -40,10 +40,10 @@
                 }
 
                 <div class="two-col d-block d-md-flex justify-content-between">
-                    @foreach (var item in Model.OrderByDescending(x => x.WriterID).Take(2))
+                    @foreach (var item in Model.OrderByDescending(x => x.CreatedDate).OrderBy(x => x.CategoryID).Take(2))
                     {
                         <a href="/Article/Index/@item.ArticleID" class="hentry v-height img-2 gradient">
-                            <div class="featured-img" style="background-image: url('@item.CoverImageUrl');"></div>
+                            <div class="featured-img" style="background-image: url('/articleImages/@item.CoverImageUrl');"></div>
                             <div class="text text-sm">
                                 <span>@item.CreatedDate.ToString("dddd, dd MMMM yyyy")</span>
                                 <h2>@item.Title</h2>

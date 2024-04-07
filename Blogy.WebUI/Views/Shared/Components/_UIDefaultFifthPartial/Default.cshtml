@@ -12,11 +12,11 @@
 		</div>
 
 		<div class="row">
-			@foreach(var item in Model.Take(6))
+			@foreach(var item in Model.Take(3))
 			{
 				<div class="col-lg-4 mb-4">
 					<div class="post-entry-alt">
-						<a href="/Article/Index/@item.ArticleID" class="img-link"><img src="@item.CoverImageUrl" alt="Image" class="img-fluid"></a>
+						<a href="/Article/Index/@item.ArticleID" class="img-link"><img src="/articleImages/@item.CoverImageUrl" alt="Image" style="object-fit:contain" class="img-fluid"></a>
 						<div class="excerpt">
 							<h2><a href="/Article/Index/@item.ArticleID">@item.Title</a></h2>
 							<div class="post-meta align-items-center text-left clearfix">
