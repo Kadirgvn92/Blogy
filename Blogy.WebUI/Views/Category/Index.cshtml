@@ -1,5 +1,4 @@
-﻿
-@model List<Article>
+﻿@model ArticleViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -15,7 +14,7 @@
         </div>
         <div class="row posts-entry">
             <div class="col-lg-8">
-                @foreach (var item in Model.OrderByDescending(x => x.CreatedDate).Take(5))
+                @foreach (var item in Model.Articles.OrderByDescending(x => x.CreatedDate).Take(3))
                 {
                     <div class="blog-entry d-flex blog-entry-search-item">
                         <div>
@@ -31,18 +30,20 @@
                         </div>
                     </div>
                 }
-                <div class="row text-start pt-5 border-top">
-                    <div class="col-md-12">
-                        <div class="custom-pagination">
-                            <span>1</span>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            ...
-                            <a href="#">15</a>
+                @if (Model.PageInfo.TotalItems > Model.PageInfo.ItemsPerPage)
+                {
+                    <div class="row text-start pt-5 border-top">
+                        <div class="col-md-12">
+                            <div class="text-dark" >
+                                    @for (int i = 1; i <= Model.PageInfo.TotalPages(); i++)
+                                    {
+                                        <a href="/Category/Index/@Model.CategoryID?page=@i" class="btn btn-primary font-weight-bold @(i == Model.PageInfo.CurrentPage ? "active" : "")">@i</a>
+                                    }
+                               
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
             </div>
 
             <div class="col-lg-4 sidebar">

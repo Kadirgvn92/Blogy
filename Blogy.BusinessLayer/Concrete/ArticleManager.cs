@@ -67,8 +67,8 @@ public class ArticleManager : IArticleService
        return _articleDal.GetArticleByFourthCategory();
     }
 
-    public List<Article> TGetArticleByCategory(int id)
+    public List<Article> TGetArticlesByCategory(int id)
     {
-       return _articleDal.GetArticleByCategory(id);
+       return _articleDal.GetArticlesByCategory(id);
     }
 }

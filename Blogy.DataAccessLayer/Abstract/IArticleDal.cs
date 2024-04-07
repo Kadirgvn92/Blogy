@@ -14,5 +14,5 @@ public interface IArticleDal : IGenericDal<Article>
     public List<Article> GetArticleBySecondCategory();
     public List<Article> GetArticleByThirdCategory();
     public List<Article> GetArticleByFourthCategory();
-    public List<Article> GetArticleByCategory(int id);
+    public List<Article> GetArticlesByCategory(int id);
 }
