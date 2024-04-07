@@ -1,4 +1,4 @@
-﻿@model ArticleViewModel
+﻿@model SearchViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="heading">Kategori : @ViewBag.Category</div>
+                <div class="heading">Arama : @ViewBag.SearchString</div>
             </div>
         </div>
         <div class="row posts-entry">
@@ -29,24 +29,28 @@
                             <p><a href="/Article/Index/@item.ArticleID" class="btn btn-sm btn-outline-primary">Dahası..</a></p>
                         </div>
                     </div>
+                   
                 }
                 @if (Model.PageInfo.TotalItems > Model.PageInfo.ItemsPerPage)
                 {
                     <div class="row text-start pt-5 border-top">
                         <div class="col-md-12">
-                            <div class="text-dark" >
-                                    @for (int i = 1; i <= Model.PageInfo.TotalPages(); i++)
-                                    {
-                                        <a href="/Category/Index/@Model.CategoryID?page=@i" class="btn btn-primary font-weight-bold @(i == Model.PageInfo.CurrentPage ? "active" : "")">@i</a>
-                                    }
-                               
+                            <div class="text-dark">
+                                @for (int i = 1; i <= Model.PageInfo.TotalPages(); i++)
+                                {
+                                    <a href="/Search/Index?searchString=@Model.search&page=@i" class="btn btn-primary font-weight-bold @(i == Model.PageInfo.CurrentPage ? "active" : "")">@i</a>
+
+                                }
+
                             </div>
                         </div>
                     </div>
                 }
+                
             </div>
 
             <div class="col-lg-4 sidebar">
+
                 <div class="sidebar-box search-form-wrap mb-4">
                     <form asp-action="Index" asp-controller="Search" method="get" class="sidebar-search-form" >
                         <input type="text" class="form-control" name="searchString" value="@ViewData["CurrentFilter"]" placeholder="Birşeyler yaz ve Enter'a bas..." />

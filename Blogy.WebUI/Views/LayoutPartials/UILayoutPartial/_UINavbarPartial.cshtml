@@ -8,7 +8,7 @@
 					<div class="col-2">
 						<a href="/Default/Index" class="logo m-0 float-start">Blogy<span class="text-primary">.</span></a>
 					</div>
-					<div class="col-8 text-center">
+					<div class="col-7 text-center">
 						<form action="#" class="search-form d-inline-block d-lg-none">
 							<input type="text" class="form-control" placeholder="Ara...">
 							<span class="bi-search"></span>
@@ -43,12 +43,9 @@
 							<li><a href="/Category/Index/4">DevOps</a></li>
 						</ul>
 					</div>
-					<div class="col-2 text-end">
-						<a href="#" class="burger ms-auto float-end site-menu-toggle js-menu-toggle d-inline-block d-lg-none light">
-							<span></span>
-						</a>
-						<form action="#" class="search-form d-none d-lg-inline-block">
-							<input type="text" class="form-control" placeholder="Ara...">
+					<div class="col-3 text-end">
+						<form asp-action ="Index" asp-controller="Search" method="get" class="search-form d-none d-lg-inline-block" >
+							<input class="form-control" name="searchString" value="@ViewData["CurrentFilter"]" placeholder="Birşeyler yaz ve Enter'a bas..." />
 							<span class="bi-search"></span>
 						</form>
 					</div>
