@@ -1,0 +1,92 @@
+﻿@model ArticleViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="content mt-0 p-2">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Bloglar (@Model.TotalArticles)</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-sub">
+                                Blog kısmını bu sayfada görüntüleyebilir veya güncelleyebilirsiniz.
+                            </div>
+                            <br />
+                            <div class="card-body p-0">
+                                <div class="mailbox-controls">
+
+                                    <div class="float-right">
+                                        @Model.PageInfo.CurrentPage - @Model.PageInfo.ItemsPerPage / @Model.PageInfo.TotalPages()
+                                        <div class="btn-group">
+                                            @if (Model.PageInfo.CurrentPage > 1)
+                                            {
+                                                <a href="/Admin/Blog/Index/?page=@(Model.PageInfo.CurrentPage-1)" class="btn btn-default btn-sm"><i class="fas fa-chevron-left"></i> </a>
+                                            }
+                                            @if (Model.PageInfo.CurrentPage < Model.PageInfo.TotalPages())
+                                            {
+                                                <a href="/Admin/Blog/Index/?page=@(Model.PageInfo.CurrentPage+1)" class="btn btn-default btn-sm">><i class="fa fa-chevron-right"></i></a>
+                                            }
+                                        </div>
+                                        <!-- /.btn-group -->
+                                    </div>
+                                    <!-- /.float-right -->
+                                </div>
+                                <table class="table align-items-center table-striped mb-0">
+                                    <thead>
+                                        <tr>
+
+                                            <th class="text-uppercase text-primary text-sm font-weight-bolder ">Kapak Resmi</th>
+                                            <th class="text-uppercase text-primary text-sm font-weight-bolder ">Kategori</th>
+                                            <th class="text-uppercase text-primary text-sm font-weight-bolder ">Başlık</th>
+                                            <th class="text-uppercase text-primary text-sm font-weight-bolder ">Tarih</th>
+                                            <th class="text-uppercase text-primary text-sm font-weight-bolder text-center">Sil</th>
+                                            <th class="text-uppercase text-primary text-sm font-weight-bolder text-center">Güncelle</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="border-top">
+                                        @foreach (var item in Model.Articles)
+                                        {
+                                            <tr>
+                                                <td class="align-middle" width="150px">
+                                                    <div>
+                                                        <img src="/articleImages/@item.CoverImageUrl" class="rounded me-3" style="width:100px;height:100px;">
+                                                    </div>
+                                                </td>
+                                                <td class="align-middle" >
+                                                    <p class="text-s  mb-0">@item.Categories.CategoryName</p>
+                                                </td>
+                                                <td class="align-middle" >
+                                                    <span class="text-s  mb-0">@item.Title</span>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <span class=" text-s  mb-0">@item.CreatedDate.ToString("dddd, dd MMMM yyyy")</span>
+                                                </td>
+                                                <td width="60px" class="align-middle">
+                                                    <a href="/Admin/Article/DeleteArticle/@item.ArticleID" class="btn bg-gradient-danger ">Sil</a>
+                                                </td>
+                                                <td width="80px" class="align-middle">
+                                                    <a href="/Admin/Article/UpdateArticle/@item.ArticleID" class="btn bg-gradient-success ">Güncelle</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                <br />
+                                <div>
+                                    <a href="/Admin/Article/AddArticle/" class="btn btn-primary">Yeni Blog Oluştur</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>

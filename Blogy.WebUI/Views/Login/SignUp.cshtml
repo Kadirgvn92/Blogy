@@ -48,7 +48,7 @@
                 <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
                     <div class="card z-index-0">
                         <div class="card-body">
-                            <form method="post" role="form text-left">
+                            <form method="post" role="form text-left" asp-controller="Login" asp-action="SignUp">
                                 <div class="mb-3">
                                     <input type="text"  asp-for="Name" class="form-control mb-2" placeholder="Name" aria-label="Name" >
                                     <span asp-validation-for="Name" class="text-danger  fs-6"> </span>

@@ -16,7 +16,6 @@ builder.Services.AddIdentity<AppUser, AppRole>()
     .AddEntityFrameworkStores<BlogyDbContext>()
     .AddTokenProvider<DataProtectorTokenProvider<AppUser>>(TokenOptions.DefaultProvider);
 
-
 builder.Services.AddControllersWithViews();
 
 builder.Services.ContainerDependencies();
@@ -62,7 +61,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Default}/{action=Index}/{id?}");
 
 app.UseEndpoints(endpoints =>
 {
