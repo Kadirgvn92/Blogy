@@ -14,14 +14,8 @@ public class CommentController : Controller
     {
         _commentService = commentService;
     }
-    [HttpGet]
-    public PartialViewResult AddComment(int Articleid)
-    {
-        ViewBag.i = Articleid;
-        return PartialView();
-    }
     [HttpPost]
-    public IActionResult AddComment(AddCommentViewModel model)
+    public async Task<IActionResult> AddComment(AddCommentViewModel model)
     {
         
         string randomImage = ImageService.GetRandomImage();
@@ -38,8 +32,10 @@ public class CommentController : Controller
             Image = randomImage
 
         };
+
         _commentService.TInsert(comment);
-        return RedirectToAction("Index", "Default");
+        await Task.Delay(2000);
+        return Ok();
     }
 
     [HttpPost]

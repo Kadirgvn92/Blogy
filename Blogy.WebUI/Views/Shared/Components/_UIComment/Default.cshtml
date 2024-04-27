@@ -1,7 +1,7 @@
 ﻿
 @model ResultCommentViewModel
 
-<div class="pt-5 comment-wrap">
+<div class="pt-5 comment-wrap" id="CommentList">
     <h3 class="mb-5 heading">Yorumlar (@Model.ArticleCount)</h3>
     <ul class="comment-list">
         @foreach(var item in Model.Comment)
@@ -12,16 +12,15 @@
                 </div>
                 <div class="comment-body">
                     <h3>@item.FullName</h3>
-                    <div class="meta">@item.CommentDate.ToString("dddd, dd MMMM yyyy") </div>
+                    <div class="meta">@item.CommentDate.ToString("dddd, dd MMMM yyyy") - @item.CommentTime</div>
                     <p>@item.Content</p>
                 </div>
             </li>
-
         }
        
     </ul>
     <!-- END comment-list -->
-    <div class="comment-form-wrap pt-5" id="ReplyComment">
+    <div class="comment-form-wrap pt-5" id="AddComment">
         <h3 class="mb-5">Bir Yorum Yazın..</h3>
         <form method="post" asp-action="AddComment" asp-controller="Comment" class="p-5 bg-light">
             <input type="hidden" name="ArticleID" value="@Model.ArticleID" />
@@ -45,6 +44,12 @@
     </div>
 </div>
 
+<div class="pt-5 comment-wrap" id="MessageComment">
+    <p>Yorumunuz incelendikten sonra yayınlanacaktır.</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
     $(document).ready(function () {
         $('#commentForm').submit(function (e) {
@@ -66,7 +71,15 @@
                 success: function (response) {
                     // İşlem başarılıysa yapılacak işlemler burada
                     console.log(response); // İsteğin dönüşünü kontrol etmek için konsola yazdır
-                    alert('Yorum başarıyla eklendi!');
+                    $('#AddComment').hide();
+                    $('#MessageComment').show();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Yorum başarıyla eklendi!",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                     // Yorum eklendikten sonra sayfayı yenileme ya da başka bir işlem yapabilirsiniz
                 },
                 error: function (xhr, status, error) {
@@ -79,70 +92,3 @@
     });
 </script>
 
-
-@* <li class="comment">
-    <div class="vcard">
-        <img src="images/person_2.jpg" alt="Image placeholder">
-    </div>
-    <div class="comment-body">
-        <h3>Jean Doe</h3>
-        <div class="meta">January 9, 2018 at 2:21pm</div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-        <p><a href="#" class="reply rounded">Reply</a></p>
-    </div>
-
-    <ul class="children">
-        <li class="comment">
-            <div class="vcard">
-                <img src="images/person_3.jpg" alt="Image placeholder">
-            </div>
-            <div class="comment-body">
-                <h3>Jean Doe</h3>
-                <div class="meta">January 9, 2018 at 2:21pm</div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                <p><a href="#" class="reply rounded">Reply</a></p>
-            </div>
-
-
-            <ul class="children">
-                <li class="comment">
-                    <div class="vcard">
-                        <img src="images/person_4.jpg" alt="Image placeholder">
-                    </div>
-                    <div class="comment-body">
-                        <h3>Jean Doe</h3>
-                        <div class="meta">January 9, 2018 at 2:21pm</div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                        <p><a href="#" class="reply rounded">Reply</a></p>
-                    </div>
-
-                    <ul class="children">
-                        <li class="comment">
-                            <div class="vcard">
-                                <img src="images/person_5.jpg" alt="Image placeholder">
-                            </div>
-                            <div class="comment-body">
-                                <h3>Jean Doe</h3>
-                                <div class="meta">January 9, 2018 at 2:21pm</div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                <p><a href="#" class="reply rounded">Reply</a></p>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    </ul>
-</li>
-
-<li class="comment">
-    <div class="vcard">
-        <img src="images/person_1.jpg" alt="Image placeholder">
-    </div>
-    <div class="comment-body">
-        <h3>Jean Doe</h3>
-        <div class="meta">January 9, 2018 at 2:21pm</div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-        <p><a href="#" class="reply rounded">Reply</a></p>
-    </div>
-</li> *@
