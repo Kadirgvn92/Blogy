@@ -14,4 +14,11 @@ public class EfCommentDal : GenericRepository<Comment>, ICommentDal
     public EfCommentDal(BlogyDbContext db) : base(db)
     {
     }
+
+    public List<Comment> GetCommentsWithArticleId(int id)
+    {
+        using var context = new BlogyDbContext();
+        var values = context.Comments.Where(x => x.ArticleID  == id).ToList();  
+        return values;
+    }
 }

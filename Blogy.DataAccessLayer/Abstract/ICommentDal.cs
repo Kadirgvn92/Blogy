@@ -8,4 +8,5 @@ using System.Threading.Tasks;
 namespace Blogy.DataAccessLayer.Abstract;
 public interface ICommentDal : IGenericDal<Comment>
 {
+    public List<Comment> GetCommentsWithArticleId(int id);
 }

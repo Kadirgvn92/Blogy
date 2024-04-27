@@ -8,4 +8,5 @@ using System.Threading.Tasks;
 namespace Blogy.BusinessLayer.Abstract;
 public interface ICommentService : IGenericService<Comment>
 {
+    public List<Comment> TGetCommentsWithArticleId(int id);
 }

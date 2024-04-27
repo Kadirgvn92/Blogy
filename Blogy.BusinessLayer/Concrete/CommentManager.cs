@@ -32,6 +32,11 @@ public class CommentManager : ICommentService
        return _commentDal.GetByID(id);
     }
 
+    public List<Comment> TGetCommentsWithArticleId(int id)
+    {
+        return _commentDal.GetCommentsWithArticleId(id);
+    }
+
     public void TInsert(Comment t)
     {
         _commentDal.Insert(t);
