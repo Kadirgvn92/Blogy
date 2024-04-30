@@ -1,10 +1,12 @@
 ﻿using Blogy.BusinessLayer.Abstract;
 using Blogy.WebUI.Areas.Admin.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Blogy.WebUI.Controllers;
+[AllowAnonymous]
 public class CategoryController : Controller
 {
 	private readonly IArticleService _articleService;

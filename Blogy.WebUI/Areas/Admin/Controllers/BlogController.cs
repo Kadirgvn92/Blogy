@@ -107,4 +107,10 @@ public class BlogController : Controller
         _articleService.TInsert(article);
         return RedirectToAction("Index", "Blog", new { area = "Admin" });
     }
+    public IActionResult DeleteArticle(int id)
+    {
+        _articleService.TDelete(id);
+        return View();
+    }
+    
 }

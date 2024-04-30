@@ -1,7 +1,9 @@
 ﻿using Blogy.BusinessLayer.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blogy.WebUI.Controllers;
+[AllowAnonymous]
 public class ArticleController : Controller
 {
 	private readonly IArticleService _articleService;
