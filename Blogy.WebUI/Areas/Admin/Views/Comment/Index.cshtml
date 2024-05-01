@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Yorumlar</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item active">Yorumlar</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Tüm Yorumlar</h3>
+                        </div>
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Ad Soyad</th>
+                                        <th>Mail</th>
+                                        <th>Yorum</th>
+                                        <th>Tarih</th>
+                                        <th>Saat</th>
+                                        <th>Durum</th>
+                                        <th>Sil</th>
+                                        <th>Düzenle</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+</div>
+
+
+@section scripts {
+
+    <script>
+        $(document).ready(function () {
+            // Sayfa yüklendiğinde verileri çekmek için AJAX isteği gönder
+            $.ajax({
+                url: '/Admin/Comment/GetComment', // Verileri almak için gerekli olan URL'yi ayarlayın
+                type: 'GET', // Verileri almak için GET isteği gönderiyoruz
+                dataType: 'json', // Sunucudan alınacak veri türü
+                success: function (data) {
+                    // AJAX isteği başarılı olduğunda verileri işleyin
+                    // Burada data değişkeni ile alınan verilere erişebilirsiniz
+                    console.log(data); // Konsola verileri yazdırın (isteğe bağlı)
+
+                    // Verileri tabloya ekleme işlemi
+                    $.each(data, function (index, item) {
+                        // Her bir öğe için tabloya bir satır ekleme
+                        var row = $('<tr>');
+                        // Özellikleri tabloya ekleyin
+                        row.append($('<td>').text(item.FullName));
+                        row.append($('<td>').text(item.Email));
+                        row.append($('<td>').text(item.Content));
+                        row.append($('<td>').text(new Date(item.CommentDate).toLocaleDateString())); // Tarih nesnesini kısa tarih formatına dönüştürme
+                        row.append($('<td>').text(item.CommentTime));
+                        row.append($('<td>').text(item.CommentStatus));
+
+                        var deleteButton = $('<a>').attr('href', '/Admin/Comment/DeleteArticle/' + item.ArticleID).addClass('btn bg-gradient-danger').text('Sil');
+                        var deleteCell = $('<td>').append(deleteButton);
+                        row.append(deleteCell);
+
+                        // Güncelle butonunu oluşturun
+                        var updateButton = $('<a>').attr('href', '/Admin/Comment/UpdateArticle/' + item.ArticleID).addClass('btn bg-gradient-success').text('Düzenle');
+                        var updateCell = $('<td>').append(updateButton);
+                        row.append(updateCell);
+                        $('#example1 tbody').append(row);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    // AJAX isteği başarısız olduğunda hata mesajını konsola yazdırın
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    </script>
+
+}
