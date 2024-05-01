@@ -1,0 +1,129 @@
+﻿@model SendMessageViewModel
+
+@{
+    Layout = null;
+}
+
+<!-- /*
+* Template Name: Blogy
+* Template Author: Untree.co
+* Template URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!doctype html>
+<html lang="en">
+<head>
+
+    @await Html.PartialAsync("~/Views/LayoutPartials/UILayoutPartial/_UIHeadPartial.cshtml")
+</head>
+<body>
+
+    @await Html.PartialAsync("~/Views/LayoutPartials/UILayoutPartial/_UIHeaderPartial.cshtml")
+
+    @await Html.PartialAsync("~/Views/LayoutPartials/UILayoutPartial/_UINavbarPartial.cshtml")
+
+    <div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url('/blogy-1.0.0/images/hero_5.jpg');">
+        <div class="container">
+            <div class="row same-height justify-content-center">
+                <div class="col-md-6">
+                    <div class="post-entry text-center">
+                        <h1 class="mb-4">İletişim</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
+                    <div class="contact-info">
+
+                        <div class="address mt-2">
+                            <i class="icon-room"></i>
+                            <h4 class="mb-2">Konum:</h4>
+                            <p>Çalı Nilüfer<br> BURSA</p>
+                        </div>
+
+                        <div class="open-hours mt-4">
+                            <i class="icon-clock-o"></i>
+                            <h4 class="mb-2">Açık Saatler:</h4>
+                            <p>
+                                Pazartesi - Cuma:<br>
+                               0830 - 1830
+                            </p>
+                        </div>
+
+                        <div class="email mt-4">
+                            <i class="icon-envelope"></i>
+                            <h4 class="mb-2">Mail Adresi:</h4>
+                            <p>info@blogy.com</p>
+                        </div>
+
+                        <div class="phone mt-4">
+                            <i class="icon-phone"></i>
+                            <h4 class="mb-2">Telefon:</h4>
+                            <p>0224 341 11 11</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+                    <form method="post">
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <input type="text" asp-for="Name" class="form-control" placeholder="Ad Soyad">
+                            </div>
+                            <div class="col-6 mb-3">
+                                <input type="email" asp-for="Mail" class="form-control" placeholder="Mail Adresi">
+                            </div>
+                            <div class="col-12 mb-3">
+                                <input type="text" asp-for="Subject" class="form-control" placeholder="Konu">
+                            </div>
+                            <div class="col-12 mb-3">
+                                <textarea  asp-for="MessageBody" cols="30" rows="7" class="form-control" placeholder="Mesajınız"></textarea>
+                            </div>
+
+                            <div class="col-12">
+                                <input type="submit" value="Gönder" class="btn btn-primary">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+        <br />
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d5127.672581210022!2d28.916867863081265!3d40.16605971959501!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1str!2str!4v1714566433096!5m2!1str!2str" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div> <!-- /.untree_co-section -->
+
+    
+   
+
+    @await Html.PartialAsync("~/Views/LayoutPartials/UILayoutPartial/_UIFooterPartial.cshtml") <!-- /.site-footer -->
+    <!-- Preloader -->
+    <div id="overlayer"></div>
+    <div class="loader">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    @await Html.PartialAsync("~/Views/LayoutPartials/UILayoutPartial/_UIScriptPartial.cshtml")
+
+    <script>
+        $('form').submit(function (e) {
+            e.preventDefault();
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Mesaj gönderildi",
+                showConfirmButton: false,
+                timer: 1200
+            });
+            this.submit();
+        });
+    </script>
+</body>
+</html>
+

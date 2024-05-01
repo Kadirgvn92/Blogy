@@ -14,7 +14,7 @@
         </div>
         <div class="row posts-entry">
             <div class="col-lg-8">
-                @foreach (var item in Model.Articles.OrderByDescending(x => x.CreatedDate).Take(3))
+                @foreach (var item in Model.Articles.OrderByDescending(x => x.CreatedDate))
                 {
                     <div class="blog-entry d-flex blog-entry-search-item">
                         <div>

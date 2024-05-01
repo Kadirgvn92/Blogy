@@ -29,5 +29,8 @@ public static class Extensions
 
         services.AddScoped<IWriterDal, EfWriterDal>();
         services.AddScoped<IWriterService, WriterManager>();
+
+        services.AddScoped<IContactDal, EfContactDal>();
+        services.AddScoped<IContactService, ContactManager>();
     }
 }

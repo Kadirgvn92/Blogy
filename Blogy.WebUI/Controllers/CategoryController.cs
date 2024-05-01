@@ -22,9 +22,9 @@ public class CategoryController : Controller
 		var cat = values.FirstOrDefault(x => x.CategoryID == id);
 		
 		ViewBag.Category = cat.Categories.CategoryName;
-		const int pageSize = 3;
+		const int pageSize = 5;
 
-		var model = new ArticleViewModel
+		var model = new ArticleViewModel	
 		{
 			PageInfo = new PageInfoModel()
 			{
