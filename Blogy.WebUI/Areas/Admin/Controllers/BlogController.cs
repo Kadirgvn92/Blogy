@@ -112,5 +112,79 @@ public class BlogController : Controller
         _articleService.TDelete(id);
         return View();
     }
-    
+    [HttpGet]
+    public IActionResult UpdateArticle(int id)
+    {
+        var values = _articleService.TGetByID(id);
+        List<SelectListItem> Category = (from x in _categoryService.TGetAll()
+                                         select new SelectListItem
+                                         {
+                                             Text = x.CategoryName,
+                                             Value = x.CategoryID.ToString()
+                                         }).ToList();
+        ViewBag.c = Category;
+        List<SelectListItem> Writer = (from x in _writerService.TGetAll()
+                                       select new SelectListItem
+                                       {
+                                           Text = x.Name,
+                                           Value = x.WriterID.ToString()
+                                       }).ToList();
+        ViewBag.w = Writer;
+        if (values != null)
+        {
+            var model = new UpdateArticleViewModel
+            {
+                Title = values.Title,
+                CategoryID = values.CategoryID,
+                ArticleID = values.ArticleID,
+                Description = values.Description,
+                FirstSection = values.FirstSection,
+                SecondSection = values.SecondSection,
+                ThirdSection = values.ThirdSection,
+                FourthSection = values.FourthSection,
+                CoverImageUrl = values.CoverImageUrl,
+                WriterID = values.WriterID,
+            };
+
+            return View(model);
+        }
+        return View();
+    }
+    [HttpPost]
+    public async Task<IActionResult> UpdateArticle(UpdateArticleViewModel model)
+    {
+        var values = _articleService.TGetByID(model.ArticleID);
+
+        if(model.Image !=  null)
+        {
+            var resource = Directory.GetCurrentDirectory();
+            var extension = Path.GetExtension(model.Image.FileName);
+            var imagename = GenerateName() + extension;
+            var savelocation = resource + "/wwwroot/articleImages/" + imagename;
+            var stream = new FileStream(savelocation, FileMode.Create);
+            await model.Image.CopyToAsync(stream);
+            model.CoverImageUrl = imagename;
+        }else
+        {
+            model.CoverImageUrl = values.CoverImageUrl;
+        }
+       
+
+        if (values != null)
+        {
+            values.WriterID = model.WriterID;
+            values.Title = model.Title;
+            values.CategoryID = model.CategoryID;
+            values.Description = model.Description;
+            values.FirstSection = model.FirstSection;
+            values.SecondSection = model.SecondSection;
+            values.ThirdSection = model.ThirdSection;
+            values.FourthSection = model.FourthSection;
+            values.CoverImageUrl = model.CoverImageUrl;
+
+            _articleService.TUpdate(values);
+            return RedirectToAction("Index");
+        }
+        return View();
+    }
 }

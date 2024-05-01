@@ -15,9 +15,19 @@
                         <h2><a href="/Article/Index/@item.ArticleID">@item.Title</a></h2>
                         <p>
                             @{
-                                var des = item.Description.Substring(0, 100).LastIndexOf(" ");
+                                var p = "";
+                                if (item.Description.Length < 100)
+                                {
+                                    p = item.Description.ToString();
+                                }
+                                else
+                                {
+                                    var des = item.Description.Substring(0, 100).LastIndexOf(" ");
+                                    p = item.Description.Substring(0, des);
+                                }
                             }
-                            @item.Description.Substring(0, des)...
+                            @p
+                           
                         </p>
                         <p><a href="/Article/Index/@item.ArticleID" class="read-more">Okumaya devam et..</a></p>
                     </div>
