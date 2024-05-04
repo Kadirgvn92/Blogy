@@ -84,6 +84,12 @@
 
                 @await Component.InvokeAsync("_AdminDashboardWriterPartial")
             </div>
+            <div class="row">
+
+                @await Component.InvokeAsync("_AdminDashboardAllComment")
+
+                @await Component.InvokeAsync("_AdminDashboardWaitingCommentPartial")
+            </div>
         </div>
     </section>
 
