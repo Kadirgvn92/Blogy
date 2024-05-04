@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "AcceptedCommentList";
+    ViewData["Title"] = "CanceledCommentList";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -9,12 +9,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Onaylanan Yorumlar</h1>
+                    <h1>Yorumlar</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Ana Sayfa</a></li>
-                        <li class="breadcrumb-item active">Onaylanan Yorumlar</li>
+                        <li class="breadcrumb-item active">Yorumlar</li>
                     </ol>
                 </div>
 
@@ -27,7 +27,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Onaylanan Yorumlar</h3>
+                            <h3 class="card-title">Tüm Yorumlar</h3>
                         </div>
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
@@ -39,6 +39,7 @@
                                         <th width="150px">Tarih</th>
                                         <th width="100px">Saat</th>
                                         <th width="200px" class="text-center">Durum</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -79,10 +80,18 @@
 
             // Sayfa yüklendiğinde verileri çekmek için AJAX isteği gönder
             $.ajax({
-                url: '/Admin/Comment/GetAcceptedComment', // Verileri almak için gerekli olan URL'yi ayarlayın
+                url: '/Admin/Comment/GetCanceledComment', // Verileri almak için gerekli olan URL'yi ayarlayın
                 type: 'GET', // Verileri almak için GET isteği gönderiyoruz
                 dataType: 'json', // Sunucudan alınacak veri türü
                 success: function (data) {
+                    // AJAX isteği başarılı olduğunda verileri işleyin
+                    // Burada data değişkeni ile alınan verilere erişebilirsiniz
+                    console.log(data); // Konsola verileri yazdırın (isteğe bağlı)
+
+
+                    var commentStatusSelect = $('#modal-lg select');
+                    commentStatusSelect.append('<option value="Onayla">Onayla</option>');
+                    commentStatusSelect.append('<option value="İptal Et">İptal Et</option>');
                     // DataTable'ı oluşturun ve verileri ekleyin
                     $('#example1').DataTable({
                         data: data, // Tabloya eklenecek veriler
@@ -115,7 +124,7 @@
                                         return '<span class="badge badge-danger">' + row.CommentStatus + '</span>';
                                     }
                                 }
-                            },
+                            }
                         ],
                         "paging": true, // Sayfalama özelliğini etkinleştir
                         "lengthChange": false, // Kayıt sayısı seçme alanını kapat
@@ -140,4 +149,3 @@
     </script>
 
 }
-

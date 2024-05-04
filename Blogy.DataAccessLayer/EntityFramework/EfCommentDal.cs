@@ -39,10 +39,31 @@ public class EfCommentDal : GenericRepository<Comment>, ICommentDal
         }
     }
 
+    public List<Comment> GetAcceptedComments()
+    {
+        using var context = new BlogyDbContext();
+        var values = context.Comments.Where(x => x.CommentStatus == "Onaylandı").ToList();
+        return values;
+    }
+
+    public List<Comment> GetCanceledComments()
+    {
+        using var context = new BlogyDbContext();
+        var values = context.Comments.Where(x => x.CommentStatus == "İptal Edildi").ToList();
+        return values;
+    }
+
     public List<Comment> GetCommentsWithArticleId(int id)
     {
         using var context = new BlogyDbContext();
         var values = context.Comments.Where(x => x.ArticleID  == id).ToList();  
+        return values;
+    }
+
+    public List<Comment> GetWaitingComments()
+    {
+        using var context = new BlogyDbContext();
+        var values = context.Comments.Where(x => x.CommentStatus == "Onay Bekliyor").ToList();
         return values;
     }
 }

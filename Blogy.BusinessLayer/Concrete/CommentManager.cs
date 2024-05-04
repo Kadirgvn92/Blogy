@@ -32,6 +32,11 @@ public class CommentManager : ICommentService
         _commentDal.Delete(id);
     }
 
+    public List<Comment> TGetAcceptedComments()
+    {
+       return _commentDal.GetAcceptedComments();
+    }
+
     public List<Comment> TGetAll()
     {
        return _commentDal.GetAll();
@@ -42,9 +47,19 @@ public class CommentManager : ICommentService
        return _commentDal.GetByID(id);
     }
 
+    public List<Comment> TGetCanceledComments()
+    {
+        return _commentDal.GetCanceledComments();
+    }
+
     public List<Comment> TGetCommentsWithArticleId(int id)
     {
         return _commentDal.GetCommentsWithArticleId(id);
+    }
+
+    public List<Comment> TGetWaitingComments()
+    {
+       return _commentDal.GetWaitingComments();
     }
 
     public void TInsert(Comment t)

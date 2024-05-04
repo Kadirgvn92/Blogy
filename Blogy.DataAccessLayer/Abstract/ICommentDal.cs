@@ -11,5 +11,7 @@ public interface ICommentDal : IGenericDal<Comment>
     public List<Comment> GetCommentsWithArticleId(int id);
     public void ChangeOk(int id);
     public void ChangeCancel(int id);
-
+    public List<Comment> GetWaitingComments();
+    public List<Comment> GetAcceptedComments();
+    public List<Comment> GetCanceledComments();
 }

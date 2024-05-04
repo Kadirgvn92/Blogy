@@ -39,8 +39,7 @@
                                         <th width="150px">Tarih</th>
                                         <th width="100px">Saat</th>
                                         <th width="200px" class="text-center">Durum</th>
-                                        <th width="160px" class="text-center">Onayla</th>
-                                        <th width="160px" class="text-center">İptal Et</th>
+                                       
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -124,24 +123,6 @@
                                     } else {
                                         return '<span class="badge badge-danger">' + row.CommentStatus + '</span>';
                                     }
-                                }
-                            },
-                            {
-                                data: null, // Veri olmadığı için null
-                                width: '160px',
-                                className: 'text-center',
-                                render: function (data, type, row, meta) {
-                                    // Durum Değiştir düğmesini oluşturun ve modal'ı açmak için gerekli öznitelikleri ekleyin
-                                    return '<a href="/Admin/Comment/ChangeOk/' + row.CommentID + '" class="btn bg-gradient-success">Onayla</a>';
-                                }
-                            },
-                            {
-                                data: null, // Veri olmadığı için null
-                                width: '160px',
-                                className: 'text-center',
-                                render: function (data, type, row, meta) {
-                                    // Durum Değiştir düğmesini oluşturun ve modal'ı açmak için gerekli öznitelikleri ekleyin
-                                    return '<a href="/Admin/Comment/ChangeCancel/' + row.CommentID + '" class="btn bg-gradient-danger">İptal Et</a>';
                                 }
                             }
                         ],

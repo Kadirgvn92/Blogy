@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "AcceptedCommentList";
+    ViewData["Title"] = "WaitingCommentList";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -9,12 +9,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Onaylanan Yorumlar</h1>
+                    <h1>Onay Bekleyen Yorumlar</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Ana Sayfa</a></li>
-                        <li class="breadcrumb-item active">Onaylanan Yorumlar</li>
+                        <li class="breadcrumb-item active">Onay Bekleyen Yorumlar</li>
                     </ol>
                 </div>
 
@@ -27,7 +27,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Onaylanan Yorumlar</h3>
+                            <h3 class="card-title">Onay Bekleyen Yorumlar</h3>
                         </div>
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
@@ -39,6 +39,8 @@
                                         <th width="150px">Tarih</th>
                                         <th width="100px">Saat</th>
                                         <th width="200px" class="text-center">Durum</th>
+                                        <th width="160px" class="text-center">Onayla</th>
+                                        <th width="160px" class="text-center">İptal Et</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -79,7 +81,7 @@
 
             // Sayfa yüklendiğinde verileri çekmek için AJAX isteği gönder
             $.ajax({
-                url: '/Admin/Comment/GetAcceptedComment', // Verileri almak için gerekli olan URL'yi ayarlayın
+                url: '/Admin/Comment/GetWaitingComment', // Verileri almak için gerekli olan URL'yi ayarlayın
                 type: 'GET', // Verileri almak için GET isteği gönderiyoruz
                 dataType: 'json', // Sunucudan alınacak veri türü
                 success: function (data) {
@@ -116,6 +118,24 @@
                                     }
                                 }
                             },
+                            {
+                                data: null, // Veri olmadığı için null
+                                width: '160px',
+                                className: 'text-center',
+                                render: function (data, type, row, meta) {
+                                    // Durum Değiştir düğmesini oluşturun ve modal'ı açmak için gerekli öznitelikleri ekleyin
+                                    return '<a href="/Admin/Comment/ChangeOk/' + row.CommentID + '" class="btn bg-gradient-success">Onayla</a>';
+                                }
+                            },
+                            {
+                                data: null, // Veri olmadığı için null
+                                width: '160px',
+                                className: 'text-center',
+                                render: function (data, type, row, meta) {
+                                    // Durum Değiştir düğmesini oluşturun ve modal'ı açmak için gerekli öznitelikleri ekleyin
+                                    return '<a href="/Admin/Comment/ChangeCancel/' + row.CommentID + '" class="btn bg-gradient-danger">İptal Et</a>';
+                                }
+                            }
                         ],
                         "paging": true, // Sayfalama özelliğini etkinleştir
                         "lengthChange": false, // Kayıt sayısı seçme alanını kapat
@@ -140,4 +160,6 @@
     </script>
 
 }
+
+
 

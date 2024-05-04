@@ -12,4 +12,8 @@ public interface ICommentService : IGenericService<Comment>
 
     public void TChangeOk(int id);
     public void TChangeCancel(int id);
+
+    public List<Comment> TGetWaitingComments();
+    public List<Comment> TGetAcceptedComments();
+    public List<Comment> TGetCanceledComments();
 }

@@ -44,15 +44,47 @@ public class CommentController : Controller
 
     public IActionResult AcceptedCommentList()
     {
-        
-        return View();
+        var comments = _commentService.TGetAcceptedComments();
+        return View(comments);
+    }
+    [HttpGet]
+    public IActionResult GetAcceptedComment()
+    {
+        // Comment nesnelerini al
+        var comments = _commentService.TGetAcceptedComments();
+        // Comment nesnelerini JSON formatına dönüştür
+        var jsonComments = JsonConvert.SerializeObject(comments);
+        // JSON formatındaki Comment nesnelerini View'e gönder
+        return Content(jsonComments, "application/json");
     }
     public IActionResult WaitingCommentList()
     {
-        return View();
+        var comments = _commentService.TGetWaitingComments();
+        return View(comments);
+    }
+    [HttpGet]
+    public IActionResult GetWaitingComment()
+    {
+        // Comment nesnelerini al
+        var comments = _commentService.TGetWaitingComments();
+        // Comment nesnelerini JSON formatına dönüştür
+        var jsonComments = JsonConvert.SerializeObject(comments);
+        // JSON formatındaki Comment nesnelerini View'e gönder
+        return Content(jsonComments, "application/json");
     }
     public IActionResult CanceledCommentList()
     {
-        return View();
+        var comments = _commentService.TGetCanceledComments();
+        return View(comments);
+    }
+    [HttpGet]
+    public IActionResult GetCanceledComment()
+    {
+        // Comment nesnelerini al
+        var comments = _commentService.TGetCanceledComments();
+        // Comment nesnelerini JSON formatına dönüştür
+        var jsonComments = JsonConvert.SerializeObject(comments);
+        // JSON formatındaki Comment nesnelerini View'e gönder
+        return Content(jsonComments, "application/json");
     }
 }
