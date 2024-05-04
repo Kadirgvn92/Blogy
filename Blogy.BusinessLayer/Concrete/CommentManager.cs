@@ -17,6 +17,16 @@ public class CommentManager : ICommentService
         _commentDal = commentDal;
     }
 
+    public void TChangeCancel(int id)
+    {
+        _commentDal.ChangeCancel(id);
+    }
+
+    public void TChangeOk(int id)
+    {
+       _commentDal.ChangeOk(id);
+    }
+
     public void TDelete(int id)
     {
         _commentDal.Delete(id);

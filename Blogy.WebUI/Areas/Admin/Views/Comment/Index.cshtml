@@ -17,6 +17,7 @@
                         <li class="breadcrumb-item active">Yorumlar</li>
                     </ol>
                 </div>
+
             </div>
         </div><!-- /.container-fluid -->
     </section>
@@ -37,9 +38,9 @@
                                         <th>Yorum</th>
                                         <th width="150px">Tarih</th>
                                         <th width="100px">Saat</th>
-                                        <th width="200px">Durum</th>
-                                        <th width="80px" class="text-center">Sil</th>
-                                        <th width="120px" class="text-center">Aktif Yap</th>
+                                        <th width="200px" class="text-center">Durum</th>
+                                        <th width="160px" class="text-center">Onayla</th>
+                                        <th width="160px" class="text-center">İptal Et</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -61,6 +62,7 @@
 
 @section scripts {
 
+    @* Datatable için gerekli olan kütüphaneler *@
     <script src="~/AdminLTE-3.2.0/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="~/AdminLTE-3.2.0/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="~/AdminLTE-3.2.0/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
@@ -87,6 +89,10 @@
                     // Burada data değişkeni ile alınan verilere erişebilirsiniz
                     console.log(data); // Konsola verileri yazdırın (isteğe bağlı)
 
+
+                    var commentStatusSelect = $('#modal-lg select');
+                    commentStatusSelect.append('<option value="Onayla">Onayla</option>');
+                    commentStatusSelect.append('<option value="İptal Et">İptal Et</option>');
                     // DataTable'ı oluşturun ve verileri ekleyin
                     $('#example1').DataTable({
                         data: data, // Tabloya eklenecek veriler
@@ -94,25 +100,48 @@
                             { data: 'FullName', width: '150px' },
                             { data: 'Email', width: '200px' },
                             { data: 'Content' },
-                            { data: 'CommentDate', width: '150px' },
-                            { data: 'CommentTime', width: '100px' },
-                            { data: 'CommentStatus', width: '200px' },
                             {
-                                data: null, // Veri olmadığı için null
-                                width: '80px',
+                                data: 'CommentDate',
+                                width: '100px',
+                                render: function (data, type, row, meta) {
+                                    // Veriyi uygun formata dönüştürme
+                                    var date = new Date(data);
+                                    var formattedDate = date.getDay() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+                                    return formattedDate;
+                                }
+                            },
+                            { data: 'CommentTime', width: '100px' },
+                            {
+                                data: 'CommentStatus',
+                                width: '160px',
                                 className: 'text-center',
                                 render: function (data, type, row, meta) {
-                                    // Sil düğmesini oluşturun
-                                    return '<a href="/Admin/Comment/Delete/' + row.CommentID + '" class="btn bg-gradient-danger">Sil</a>';
+                                    // Durum Değiştir düğmesini oluşturun ve modal'ı açmak için gerekli öznitelikleri ekleyin
+                                    if (row.CommentStatus === 'Onaylandı') {
+                                        return '<span class="badge badge-success">' + row.CommentStatus + '</span>';
+                                    } else if (row.CommentStatus === 'Onay Bekliyor') {
+                                        return '<span class="badge badge-warning">' + row.CommentStatus + '</span>';
+                                    } else {
+                                        return '<span class="badge badge-danger">' + row.CommentStatus + '</span>';
+                                    }
                                 }
                             },
                             {
                                 data: null, // Veri olmadığı için null
-                                width: '120px',
+                                width: '160px',
                                 className: 'text-center',
                                 render: function (data, type, row, meta) {
-                                    // Aktif Yap düğmesini oluşturun
-                                    return '<a href="/Admin/Comment/Activate/' + row.CommentID + '" class="btn bg-gradient-success">Aktif Yap</a>';
+                                    // Durum Değiştir düğmesini oluşturun ve modal'ı açmak için gerekli öznitelikleri ekleyin
+                                    return '<a href="/Admin/Comment/ChangeOk/' + row.CommentID + '" class="btn bg-gradient-success">Onayla</a>';
+                                }
+                            },
+                            {
+                                data: null, // Veri olmadığı için null
+                                width: '160px',
+                                className: 'text-center',
+                                render: function (data, type, row, meta) {
+                                    // Durum Değiştir düğmesini oluşturun ve modal'ı açmak için gerekli öznitelikleri ekleyin
+                                    return '<a href="/Admin/Comment/ChangeCancel/' + row.CommentID + '" class="btn bg-gradient-danger">İptal Et</a>';
                                 }
                             }
                         ],
@@ -123,10 +152,10 @@
                         "info": true, // Tablo bilgi kısmını göster
                         "autoWidth": false, // Otomatik genişlik ayarını devre dışı bırak
                         "responsive": true, // Duyarlılık özelliğini etkinleştir
-                        "buttons": 
-                        [ // İsteğe bağlı olarak ekstra düğmeler ekleyin
-                            'copy', 'excel', 'pdf'
-                        ]
+                        "buttons":
+                            [ // İsteğe bağlı olarak ekstra düğmeler ekleyin
+                                'copy', 'excel', 'pdf'
+                            ]
                     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
                 },
                 error: function (xhr, status, error) {

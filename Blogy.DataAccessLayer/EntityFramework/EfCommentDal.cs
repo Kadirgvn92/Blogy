@@ -15,6 +15,30 @@ public class EfCommentDal : GenericRepository<Comment>, ICommentDal
     {
     }
 
+    public void ChangeCancel(int id)
+    {
+        using var context = new BlogyDbContext();
+        var values = context.Comments.Find(id);
+        if(values != null)
+        {
+            values.CommentStatus = "İptal Edildi";
+            context.Comments.Update(values);
+            context.SaveChanges();
+        }
+    }
+
+    public void ChangeOk(int id)
+    {
+        using var context = new BlogyDbContext();
+        var values = context.Comments.Find(id);
+        if (values != null)
+        {
+            values.CommentStatus = "Onaylandı";
+            context.Comments.Update(values);
+            context.SaveChanges();
+        }
+    }
+
     public List<Comment> GetCommentsWithArticleId(int id)
     {
         using var context = new BlogyDbContext();

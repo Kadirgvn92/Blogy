@@ -9,4 +9,7 @@ namespace Blogy.BusinessLayer.Abstract;
 public interface ICommentService : IGenericService<Comment>
 {
     public List<Comment> TGetCommentsWithArticleId(int id);
+
+    public void TChangeOk(int id);
+    public void TChangeCancel(int id);
 }

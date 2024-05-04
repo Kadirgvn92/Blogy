@@ -1,4 +1,5 @@
 ﻿using Blogy.BusinessLayer.Abstract;
+using Blogy.WebUI.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -24,13 +25,23 @@ public class CommentController : Controller
     {
         // Comment nesnelerini al
         var comments = _commentService.TGetAll();
-
         // Comment nesnelerini JSON formatına dönüştür
         var jsonComments = JsonConvert.SerializeObject(comments);
-
         // JSON formatındaki Comment nesnelerini View'e gönder
         return Content(jsonComments, "application/json");
     }
+    
+    public IActionResult ChangeOk(int id)
+    {
+        _commentService.TChangeOk(id);
+        return RedirectToAction("Index");
+    }
+    public IActionResult ChangeCancel(int id)
+    {
+        _commentService.TChangeCancel(id);
+        return RedirectToAction("Index");
+    }
+
     public IActionResult AcceptedCommentList()
     {
         

@@ -9,4 +9,7 @@ namespace Blogy.DataAccessLayer.Abstract;
 public interface ICommentDal : IGenericDal<Comment>
 {
     public List<Comment> GetCommentsWithArticleId(int id);
+    public void ChangeOk(int id);
+    public void ChangeCancel(int id);
+
 }
