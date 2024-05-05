@@ -83,17 +83,19 @@ public class WriterController : Controller
         {
             model.ImageUrl = values.ImageUrl;
         }
-       
 
-        var writer = new Writer
+
+        if (values != null)
         {
-            Description = model.Description,
-            ImageUrl = model.ImageUrl,
-            Name = model.Name,
-            WriterID = model.WriterID,
-        };
-        _writerService.TUpdate(writer);
-        return RedirectToAction("Index");
+            values.WriterID = model.WriterID;
+            values.Name = model.Name;
+            values.Description = model.Description;
+            values.ImageUrl = model.ImageUrl;
+
+            _writerService.TUpdate(values);
+            return RedirectToAction("Index");
+        }
+        return View();
     }
     [HttpGet]
     public IActionResult CreateWriter()

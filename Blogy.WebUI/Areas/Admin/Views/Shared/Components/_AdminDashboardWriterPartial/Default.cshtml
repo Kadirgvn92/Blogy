@@ -22,7 +22,7 @@
                 @foreach(var item in Model)
                 {
                     <li>
-                        <img src="@item.ImageUrl" width="145px" height="145px" alt="User Image">
+                        <img src="/writerImages/@item.ImageUrl" style="width:145px;height:145px;object-fit:cover" alt="User Image">
                         <a class="users-list-name" href="#">@item.Name</a>
                         <span class="users-list-date">@item.Description</span>
                     </li>

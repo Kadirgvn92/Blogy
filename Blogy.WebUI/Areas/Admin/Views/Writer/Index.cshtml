@@ -110,7 +110,7 @@
                                 className: 'text-center',   
                                 render: function (data, type, row, meta) {
                                     // Durum Değiştir düğmesini oluşturun ve modal'ı açmak için gerekli öznitelikleri ekleyin
-                                    return '<a href="/Admin/Writer/DeleteWriter/' + row.CommentID + '" class="btn bg-gradient-danger">Sil</a>';
+                                    return '<a href="/Admin/Writer/DeleteWriter/' + row.WriterID + '" class="btn bg-gradient-danger">Sil</a>';
                                 }
                             },
                             {
@@ -119,7 +119,7 @@
                                 className: 'text-center',
                                 render: function (data, type, row, meta) {
                                     // Durum Değiştir düğmesini oluşturun ve modal'ı açmak için gerekli öznitelikleri ekleyin
-                                    return '<a href="/Admin/Writer/UpdateWriter/' + row.CommentID + '" class="btn bg-gradient-info">Güncelle</a>';
+                                    return '<a href="/Admin/Writer/UpdateWriter/' + row.WriterID + '" class="btn bg-gradient-info">Güncelle</a>';
                                 }
                             }
                         ],
