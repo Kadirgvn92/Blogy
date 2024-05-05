@@ -1,0 +1,149 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Yazarlar</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item active">Yazarlar</li>
+                    </ol>
+                </div>
+
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Yazarlar</h3>
+                        </div>
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th width="150px">Resim</th>
+                                        <th width="200px">Ad Soyad</th>
+                                        <th>Açıklama</th>
+                                        <th width="120px" class="text-center">Sil</th>
+                                        <th width="120px" class="text-center">Güncelle</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <br />
+                            <div>
+                                <a href="/Admin/Writer/CreateWriter/" class="btn btn-primary">Yeni Yazar Oluştur</a>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+</div>
+
+
+@section scripts {
+
+    @* Datatable için gerekli olan kütüphaneler *@
+    <script src="~/AdminLTE-3.2.0/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/AdminLTE-3.2.0/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/AdminLTE-3.2.0/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/AdminLTE-3.2.0/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/AdminLTE-3.2.0/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/AdminLTE-3.2.0/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/AdminLTE-3.2.0/plugins/jszip/jszip.min.js"></script>
+    <script src="~/AdminLTE-3.2.0/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/AdminLTE-3.2.0/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/AdminLTE-3.2.0/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/AdminLTE-3.2.0/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/AdminLTE-3.2.0/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            // Sayfa yüklendiğinde verileri çekmek için AJAX isteği gönder
+            $.ajax({
+                url: '/Admin/Writer/GetWriter', // Verileri almak için gerekli olan URL'yi ayarlayın
+                type: 'GET', // Verileri almak için GET isteği gönderiyoruz
+                dataType: 'json', // Sunucudan alınacak veri türü
+                success: function (data) {
+                    // AJAX isteği başarılı olduğunda verileri işleyin
+                    // Burada data değişkeni ile alınan verilere erişebilirsiniz
+                    console.log(data); // Konsola verileri yazdırın (isteğe bağlı)
+                    // DataTable'ı oluşturun ve verileri ekleyin
+                    $('#example1').DataTable({
+                        data: data, // Tabloya eklenecek veriler
+                        columns: [ // Sütunları tanımlayın
+                            {
+                                data: 'ImageUrl',
+                                width: '150px',
+                                className: 'rounded me-3 text-center',
+                                render: function (data, type, row, meta) {
+                                    // Durum Değiştir düğmesini oluşturun ve modal'ı açmak için gerekli öznitelikleri ekleyin
+                                    return '<div><img src = "/writerImages/' + row.ImageUrl + '" style = "width:75px;height:75px;" ></div>'
+                                }
+                            },
+                            { data: 'Name', width: '150px', className:'align-item-center' },
+                            { data: 'Description' },
+                            {
+                                data: null, // Veri olmadığı için null
+                                width: '120px',
+                                className: 'text-center',   
+                                render: function (data, type, row, meta) {
+                                    // Durum Değiştir düğmesini oluşturun ve modal'ı açmak için gerekli öznitelikleri ekleyin
+                                    return '<a href="/Admin/Writer/DeleteWriter/' + row.CommentID + '" class="btn bg-gradient-danger">Sil</a>';
+                                }
+                            },
+                            {
+                                data: null, // Veri olmadığı için null
+                                width: '120px',
+                                className: 'text-center',
+                                render: function (data, type, row, meta) {
+                                    // Durum Değiştir düğmesini oluşturun ve modal'ı açmak için gerekli öznitelikleri ekleyin
+                                    return '<a href="/Admin/Writer/UpdateWriter/' + row.CommentID + '" class="btn bg-gradient-info">Güncelle</a>';
+                                }
+                            }
+                        ],
+                        "paging": true, // Sayfalama özelliğini etkinleştir
+                        "lengthChange": false, // Kayıt sayısı seçme alanını kapat
+                        "searching": false, // Arama özelliğini devre dışı bırak
+                        "ordering": true, // Sıralama özelliğini etkinleştir
+                        "info": true, // Tablo bilgi kısmını göster
+                        "autoWidth": false, // Otomatik genişlik ayarını devre dışı bırak
+                        "responsive": true, // Duyarlılık özelliğini etkinleştir
+                        "buttons":
+                            [ // İsteğe bağlı olarak ekstra düğmeler ekleyin
+                                'copy', 'excel', 'pdf'
+                            ]
+                    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+                },
+                error: function (xhr, status, error) {
+                    // AJAX isteği başarısız olduğunda hata mesajını konsola yazdırın
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+
+    </script>
+
+}
+
