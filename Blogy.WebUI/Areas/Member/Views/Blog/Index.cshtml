@@ -1,8 +1,7 @@
 ﻿@model ArticleViewModel
-
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_MemberLayout.cshtml";
 }
 
 <div class="content-wrapper">
@@ -15,7 +14,7 @@
                             <div class="card-title">Bloglar (@Model.TotalArticles)</div>
                         </div>
                         <div class="card-body">
-                            
+
                             <div class="card-body p-0">
                                 <div class="mailbox-controls">
                                     <div class="card-sub">
@@ -58,20 +57,20 @@
                                                         <img src="/articleImages/@item.CoverImageUrl" class="rounded me-3" style="width:100px;height:75px;">
                                                     </div>
                                                 </td>
-                                                <td class="align-middle" >
+                                                <td class="align-middle">
                                                     <p class="text-s  mb-0">@item.Categories.CategoryName</p>
                                                 </td>
-                                                <td class="align-middle" >
+                                                <td class="align-middle">
                                                     <span class="text-s  mb-0">@item.Title</span>
                                                 </td>
                                                 <td class="align-middle">
                                                     <span class=" text-s  mb-0">@item.CreatedDate.ToString("dddd, dd MMMM yyyy")</span>
                                                 </td>
                                                 <td width="60px" class="align-middle">
-                                                    <a href="/Admin/Blog/DeleteArticle/@item.ArticleID" class="btn bg-gradient-danger ">Sil</a>
+                                                    <a href="/Member/Blog/DeleteArticle/@item.ArticleID" class="btn bg-gradient-danger ">Sil</a>
                                                 </td>
                                                 <td width="80px" class="align-middle">
-                                                    <a href="/Admin/Blog/UpdateArticle/@item.ArticleID" class="btn bg-gradient-success ">Güncelle</a>
+                                                    <a href="/Member/Blog/UpdateArticle/@item.ArticleID" class="btn bg-gradient-success ">Güncelle</a>
                                                 </td>
                                             </tr>
                                         }
@@ -79,7 +78,7 @@
                                 </table>
                                 <br />
                                 <div>
-                                    <a href="/Admin/Blog/CreateBlog/" class="btn btn-primary">Yeni Blog Oluştur</a>
+                                    <a href="/Member/Blog/CreateBlog/" class="btn btn-primary">Yeni Blog Oluştur</a>
                                 </div>
                             </div>
                         </div>
@@ -88,4 +87,4 @@
             </div>
         </div>
     </div>
-    </div>
+</div>

@@ -1,18 +1,15 @@
 ﻿using Blogy.BusinessLayer.Abstract;
-using Blogy.BusinessLayer.Container;
 using Blogy.EntityLayer;
-using Blogy.WebUI.Areas.Admin.Models;
+using Blogy.WebUI.Areas.Member.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using NuGet.Packaging.Signing;
+using PageInfoModel = Blogy.WebUI.Areas.Member.Models.PageInfoModel;
 
-namespace Blogy.WebUI.Areas.Admin.Controllers;
+namespace Blogy.WebUI.Areas.Member.Controllers;
 
-[Area("Admin")]
-[Route("Admin/[controller]/[action]/{id?}")]
+[Area("Member")]
+[Route("Member/[controller]/[action]/{id?}")]
 public class BlogController : Controller
 {
     private readonly IArticleService _articleService;

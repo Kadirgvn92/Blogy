@@ -1,9 +1,8 @@
 ﻿using Blogy.BusinessLayer.Abstract;
-using Blogy.WebUI.Areas.Admin.Models;
+using Blogy.WebUI.Areas.Member.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using PageInfoModel = Blogy.WebUI.Areas.Member.Models.PageInfoModel;
 
 namespace Blogy.WebUI.Controllers;
 [AllowAnonymous]

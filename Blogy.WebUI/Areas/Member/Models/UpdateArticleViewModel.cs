@@ -1,4 +1,4 @@
-﻿namespace Blogy.WebUI.Areas.Admin.Models;
+﻿namespace Blogy.WebUI.Areas.Member.Models;
 
 public class UpdateArticleViewModel
 {
