@@ -65,6 +65,15 @@ public class EfArticleDal : GenericRepository<Article>, IArticleDal
         var values = context.Articles.Where(x => x.CategoryID == 3).Include(x => x.Categories).Include(x => x.Writer).ToList();
         return values;
     }
+
+    public void DeleteArticle(int id)
+    {
+        using var context = new BlogyDbContext();
+        var values = context.Articles.Find(id);
+        values.IsDeleted = true;
+        context.Update(values);
+        context.SaveChanges();
+    }
 }
 
      

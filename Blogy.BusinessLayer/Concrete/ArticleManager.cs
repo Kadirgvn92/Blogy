@@ -71,4 +71,9 @@ public class ArticleManager : IArticleService
     {
        return _articleDal.GetArticlesByCategory(id);
     }
+
+    public void TDeleteArticle(int id)
+    {
+        _articleDal.DeleteArticle(id);
+    }
 }
