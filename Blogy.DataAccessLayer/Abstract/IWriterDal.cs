@@ -8,4 +8,7 @@ using System.Threading.Tasks;
 namespace Blogy.DataAccessLayer.Abstract;
 public interface IWriterDal : IGenericDal<Writer>
 {
+    public void ActiveWriter(int id);
+    public void PassiveWriter(int id);
+    public void DeleteWriter(int id);
 }

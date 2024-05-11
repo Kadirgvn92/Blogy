@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 namespace Blogy.BusinessLayer.Abstract;
 public interface IArticleService : IGenericService<Article>
 {
+
+    public void TPassiveArticle(int id);
+    public void TActiveArticle(int id);
     public void TDeleteArticle(int id);
     public List<Article> TGetAllArticles();
     public Article TGetArticle(int id);

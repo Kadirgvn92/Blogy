@@ -30,7 +30,7 @@
                             <h3 class="card-title">Yazarlar</h3>
                         </div>
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example1" class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th width="150px">Resim</th>
@@ -38,6 +38,7 @@
                                         <th>Açıklama</th>
                                         <th width="120px" class="text-center">Sil</th>
                                         <th width="120px" class="text-center">Güncelle</th>
+                                        <th width="120px" class="text-center">Durum</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -96,18 +97,18 @@
                             {
                                 data: 'ImageUrl',
                                 width: '150px',
-                                className: 'rounded me-3 text-center',
+                                className: 'rounded me-3 text-center align-middle',
                                 render: function (data, type, row, meta) {
                                     // Durum Değiştir düğmesini oluşturun ve modal'ı açmak için gerekli öznitelikleri ekleyin
                                     return '<div><img src = "/writerImages/' + row.ImageUrl + '" style = "width:75px;height:75px;" ></div>'
                                 }
                             },
-                            { data: 'Name', width: '150px', className:'align-item-center' },
-                            { data: 'Description' },
+                            { data: 'Name', width: '150px', className: 'align-middle' },
+                            { data: 'Description', className: 'align-middle' },
                             {
                                 data: null, // Veri olmadığı için null
                                 width: '120px',
-                                className: 'text-center',   
+                                className: 'text-center align-middle',
                                 render: function (data, type, row, meta) {
                                     // Durum Değiştir düğmesini oluşturun ve modal'ı açmak için gerekli öznitelikleri ekleyin
                                     return '<a href="/Admin/Writer/DeleteWriter/' + row.WriterID + '" class="btn bg-gradient-danger">Sil</a>';
@@ -116,10 +117,27 @@
                             {
                                 data: null, // Veri olmadığı için null
                                 width: '120px',
-                                className: 'text-center',
+                                className: 'text-center align-middle',
                                 render: function (data, type, row, meta) {
                                     // Durum Değiştir düğmesini oluşturun ve modal'ı açmak için gerekli öznitelikleri ekleyin
                                     return '<a href="/Admin/Writer/UpdateWriter/' + row.WriterID + '" class="btn bg-gradient-info">Güncelle</a>';
+                                }
+                            },
+                            {
+                                data: null,
+                                width: '120px',
+                                className: 'text-center align-middle',
+                                render: function (data, type, row, meta) {
+                                    // Aktif veya Pasif butonu
+                                    var statusButton = '';
+                                    if (row.IsActive) {
+                                        statusButton = '<a href="/Admin/Writer/PassiveWriter/' + row.WriterID + '" class="btn bg-gradient-warning">Pasif Yap</a>';
+                                    } else {
+                                        statusButton = '<a href="/Admin/Writer/ActiveWriter/' + row.WriterID + '" class="btn bg-gradient-success">Aktif Yap</a>';
+                                    }
+
+                                    // Butonları birleştirip döndür
+                                    return statusButton;
                                 }
                             }
                         ],

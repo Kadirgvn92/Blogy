@@ -39,7 +39,7 @@ public class WriterController : Controller
     public IActionResult GetWriter()
     {
         // Comment nesnelerini al
-        var comments = _writerService.TGetAll();
+        var comments = _writerService.TGetAll().Where(x => x.IsDeleted == false);
         
         // Comment nesnelerini JSON formatına dönüştür
         var jsonComments = JsonConvert.SerializeObject(comments);
@@ -48,7 +48,17 @@ public class WriterController : Controller
     }
     public IActionResult DeleteWriter(int id)
     {
-        _writerService.TDelete(id);
+        _writerService.TDeleteWriter(id);
+        return RedirectToAction("Index");
+    }
+    public IActionResult ActiveWriter(int id)
+    {
+        _writerService.TActiveWriter(id);
+        return RedirectToAction("Index");
+    }
+    public IActionResult PassiveWriter(int id)
+    {
+        _writerService.TPassiveWriter(id);
         return RedirectToAction("Index");
     }
     [HttpGet]

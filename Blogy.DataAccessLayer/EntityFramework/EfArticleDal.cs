@@ -69,9 +69,28 @@ public class EfArticleDal : GenericRepository<Article>, IArticleDal
     public void DeleteArticle(int id)
     {
         using var context = new BlogyDbContext();
-        var values = context.Articles.Find(id);
+        var values = context.Articles.FirstOrDefault(x => x.ArticleID == id);
         values.IsDeleted = true;
-        context.Update(values);
+        context.Articles.Update(values);
+        context.SaveChanges();
+    }
+
+    public void PassiveArticle(int id)
+    {
+        using var context = new BlogyDbContext();
+        var values = context.Articles.FirstOrDefault(x => x.ArticleID == id);
+        values.IsActive = false;
+        context.Articles.Update(values);
+        context.SaveChanges();
+
+    }
+
+    public void ActiveArticle(int id)
+    {
+        using var context = new BlogyDbContext();
+        var values = context.Articles.FirstOrDefault(x => x.ArticleID == id);
+        values.IsActive = true;
+        context.Articles.Update(values);
         context.SaveChanges();
     }
 }

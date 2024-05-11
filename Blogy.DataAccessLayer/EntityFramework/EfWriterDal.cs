@@ -14,4 +14,32 @@ public class EfWriterDal : GenericRepository<Writer>, IWriterDal
     public EfWriterDal(BlogyDbContext db) : base(db)
     {
     }
+
+    public void ActiveWriter(int id)
+    {
+        using var context = new BlogyDbContext();
+        var values = context.Writers.Find(id);
+        values.IsActive = true;
+        context.Writers.Update(values);
+        context.SaveChanges();
+
+    }
+
+    public void DeleteWriter(int id)
+    {
+        using var context = new BlogyDbContext();
+        var values = context.Writers.Find(id);
+        values.IsDeleted = true;
+        context.Writers.Update(values);
+        context.SaveChanges();
+    }
+
+    public void PassiveWriter(int id)
+    {
+        using var context = new BlogyDbContext();
+        var values = context.Writers.Find(id);
+        values.IsActive = false;
+        context.Writers.Update(values);
+        context.SaveChanges();
+    }
 }

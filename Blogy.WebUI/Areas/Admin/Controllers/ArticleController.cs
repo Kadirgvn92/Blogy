@@ -4,7 +4,6 @@ using Blogy.EntityLayer;
 using Blogy.WebUI.Areas.Member.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Articley.WebUI.Areas.Member.Controllers;
 
@@ -14,8 +13,6 @@ public class ArticleController : Controller
 {
     private readonly IArticleService _articleService;
     private readonly UserManager<AppUser> _userManager;
-    private readonly IWriterService _writerService;
-    private readonly ICategoryService _categoryService;
 
     public string GenerateName()
     {
@@ -31,12 +28,10 @@ public class ArticleController : Controller
 
         return new string(stringChars);
     }
-    public ArticleController(IArticleService articleService, UserManager<AppUser> userManager, IWriterService writerService, ICategoryService categoryService)
+    public ArticleController(IArticleService articleService, UserManager<AppUser> userManager)
     {
         _articleService = articleService;
         _userManager = userManager;
-        _writerService = writerService;
-        _categoryService = categoryService;
     }
 
     public async Task<IActionResult> Index(int page = 1)
@@ -51,7 +46,7 @@ public class ArticleController : Controller
                 CurrentPage = page,
                 ItemsPerPage = pageSize,
             },
-            Articles = _articleService.TGetAllArticles().OrderByDescending(x => x.CreatedDate).Skip((page - 1) * pageSize).Take(pageSize).ToList(),
+            Articles = _articleService.TGetAllArticles().Where(x => x.IsDeleted == false).OrderByDescending(x => x.CreatedDate).Skip((page - 1) * pageSize).Take(pageSize).ToList(),
             TotalArticles = _articleService.TGetAllArticles().Count(),
         };
         return View(model);
@@ -59,6 +54,16 @@ public class ArticleController : Controller
     public IActionResult DeleteArticle(int id)
     {
         _articleService.TDeleteArticle(id);
-        return View();
+        return RedirectToAction("Index");
+    }
+    public IActionResult PassiveArticle(int id)
+    {
+        _articleService.TPassiveArticle(id);
+        return RedirectToAction("Index");
+    }
+    public IActionResult ActiveArticle(int id)
+    {
+        _articleService.TActiveArticle(id);
+        return RedirectToAction("Index");
     }
 }

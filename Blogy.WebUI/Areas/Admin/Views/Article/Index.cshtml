@@ -43,7 +43,6 @@
                                 <table class="table align-items-center table-striped mb-0">
                                     <thead>
                                         <tr>
-
                                             <th class="text-uppercase text-primary text-sm font-weight-bolder ">Kapak Resmi</th>
                                             <th class="text-uppercase text-primary text-sm font-weight-bolder ">Kategori</th>
                                             <th class="text-uppercase text-primary text-sm font-weight-bolder ">Başlık</th>
@@ -70,13 +69,22 @@
                                                 <td class="align-middle">
                                                     <span class=" text-s  mb-0">@item.CreatedDate.ToString("dddd, dd MMMM yyyy")</span>
                                                 </td>
-                                                <td width="60px" class="align-middle">
+                                                <td width="100px" class="align-middle text-center">
                                                     <a href="/Admin/Article/DeleteArticle/@item.ArticleID" class="btn bg-gradient-danger ">Sil</a>
                                                 </td>
-                                                
-                                                <td width="60px" class="align-middle">
-                                                    <a href="/Admin/Article/PassiveArticle/@item.ArticleID" class="btn bg-gradient-danger ">Sil</a>
-                                                </td>
+                                                @if (item.IsActive)
+                                                {
+                                                    <td width="150px" class="align-middle text-center">
+                                                        <a href="/Admin/Article/PassiveArticle/@item.ArticleID" class="btn bg-gradient-warning ">Pasif Yap</a>
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td width="150px" class="align-middle text-center">
+                                                        <a href="/Admin/Article/ActiveArticle/@item.ArticleID" class="btn bg-gradient-success ">Aktif Yap</a>
+                                                    </td>
+                                                }
+                                               
                                             </tr>
                                         }
                                     </tbody>

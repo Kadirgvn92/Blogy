@@ -17,6 +17,21 @@ public class WriterManager : IWriterService
         _writerDal = writerDal;
     }
 
+    public void TActiveWriter(int id)
+    {
+        _writerDal.ActiveWriter(id);
+    }
+
+    public void TDeleteWriter(int id)
+    {
+       _writerDal.DeleteWriter(id);
+    }
+
+    public void TPassiveWriter(int id)
+    {
+        _writerDal.PassiveWriter(id);
+    }
+
     public void TDelete(int id)
     {
         _writerDal.Delete(id);

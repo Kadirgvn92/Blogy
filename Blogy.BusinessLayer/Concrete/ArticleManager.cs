@@ -76,4 +76,14 @@ public class ArticleManager : IArticleService
     {
         _articleDal.DeleteArticle(id);
     }
+
+    public void TPassiveArticle(int id)
+    {
+        _articleDal.PassiveArticle(id);
+    }
+
+    public void TActiveArticle(int id)
+    {
+      _articleDal.ActiveArticle(id);
+    }
 }
