@@ -14,8 +14,7 @@ public class BlogyDbContext : IdentityDbContext<AppUser, AppRole, int>
 	{
 		optionsBuilder.UseSqlServer("server=DESKTOP-A6C5CRN\\MSSQLSERVER01;database=BlogyDb;Trusted_Connection=True;");
 	}
-
-	public DbSet<Article> Articles { get; set; }
+    public DbSet<Article> Articles { get; set; }
 	public DbSet<Contact> Contacts { get; set; }
 	public DbSet<Category> Categories { get; set; }
 	public DbSet<Comment> Comments { get; set; }

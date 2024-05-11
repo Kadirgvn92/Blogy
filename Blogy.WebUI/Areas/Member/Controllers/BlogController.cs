@@ -102,7 +102,7 @@ public class BlogController : Controller
         };
 
         _articleService.TInsert(article);
-        return RedirectToAction("Index", "Blog", new { area = "Admin" });
+        return RedirectToAction("Index", "Blog", new { area = "Member" });
     }
     public IActionResult DeleteArticle(int id)
     {

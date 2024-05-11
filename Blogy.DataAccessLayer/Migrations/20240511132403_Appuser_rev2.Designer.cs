@@ -4,6 +4,7 @@ using Blogy.DataAccessLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blogy.DataAccessLayer.Migrations
 {
     [DbContext(typeof(BlogyDbContext))]
-    partial class BlogyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240511132403_Appuser_rev2")]
+    partial class Appuser_rev2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -147,6 +149,9 @@ namespace Blogy.DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArticleID"), 1L, 1);
 
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("int");
+
                     b.Property<int>("CategoryID")
                         .HasColumnType("int");
 
@@ -188,6 +193,8 @@ namespace Blogy.DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ArticleID");
+
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("CategoryID");
 
@@ -344,7 +351,10 @@ namespace Blogy.DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WriterID"), 1L, 1);
 
-                    b.Property<int>("AppUserID")
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AppUserId1")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -367,7 +377,9 @@ namespace Blogy.DataAccessLayer.Migrations
 
                     b.HasKey("WriterID");
 
-                    b.HasIndex("AppUserID");
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("AppUserId1");
 
                     b.ToTable("Writers");
                 });
@@ -477,6 +489,12 @@ namespace Blogy.DataAccessLayer.Migrations
 
             modelBuilder.Entity("Blogy.EntityLayer.Article", b =>
                 {
+                    b.HasOne("Blogy.EntityLayer.AppUser", "AppUser")
+                        .WithMany("Articles")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Blogy.EntityLayer.Category", "Categories")
                         .WithMany("Articles")
                         .HasForeignKey("CategoryID")
@@ -488,6 +506,8 @@ namespace Blogy.DataAccessLayer.Migrations
                         .HasForeignKey("WriterID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("Categories");
 
@@ -507,13 +527,17 @@ namespace Blogy.DataAccessLayer.Migrations
 
             modelBuilder.Entity("Blogy.EntityLayer.Writer", b =>
                 {
-                    b.HasOne("Blogy.EntityLayer.AppUser", "User")
-                        .WithMany("Writers")
-                        .HasForeignKey("AppUserID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("Blogy.EntityLayer.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.HasOne("Blogy.EntityLayer.AppUser", null)
+                        .WithMany("Writers")
+                        .HasForeignKey("AppUserId1");
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -569,6 +593,8 @@ namespace Blogy.DataAccessLayer.Migrations
 
             modelBuilder.Entity("Blogy.EntityLayer.AppUser", b =>
                 {
+                    b.Navigation("Articles");
+
                     b.Navigation("Writers");
                 });
 

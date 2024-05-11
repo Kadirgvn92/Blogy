@@ -11,4 +11,5 @@ public interface IWriterDal : IGenericDal<Writer>
     public void ActiveWriter(int id);
     public void PassiveWriter(int id);
     public void DeleteWriter(int id);
+    public Writer GetWriter(int id);
 }

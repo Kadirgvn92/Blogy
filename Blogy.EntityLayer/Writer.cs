@@ -13,5 +13,7 @@ public class Writer
     public string Description { get; set; }
     public bool IsActive { get; set; }
     public bool IsDeleted { get; set; }
+    public AppUser User { get; set; }
+    public int AppUserID { get; set; }
     public List<Article> Articles { get; set; }
 }

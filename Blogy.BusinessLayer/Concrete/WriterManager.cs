@@ -56,4 +56,9 @@ public class WriterManager : IWriterService
     {
         _writerDal.Update(t);
     }
+
+    public Writer TGetWriter(int id)
+    {
+       return _writerDal.GetWriter(id);
+    }
 }

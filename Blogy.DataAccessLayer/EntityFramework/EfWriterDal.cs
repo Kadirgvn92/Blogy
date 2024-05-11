@@ -34,6 +34,13 @@ public class EfWriterDal : GenericRepository<Writer>, IWriterDal
         context.SaveChanges();
     }
 
+    public Writer GetWriter(int id)
+    {
+        using var context = new BlogyDbContext();
+        var values = context.Writers.FirstOrDefault(x => x.AppUserID == id);
+        return values;
+    }
+
     public void PassiveWriter(int id)
     {
         using var context = new BlogyDbContext();

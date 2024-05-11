@@ -12,4 +12,5 @@ public interface IWriterService : IGenericService<Writer>
     public void TActiveWriter(int id);
     public void TPassiveWriter(int id);
     public void TDeleteWriter(int id);
+    public Writer TGetWriter(int id);
 }
