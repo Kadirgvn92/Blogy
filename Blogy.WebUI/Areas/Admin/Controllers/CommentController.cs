@@ -34,12 +34,12 @@ public class CommentController : Controller
     public IActionResult ChangeOk(int id)
     {
         _commentService.TChangeOk(id);
-        return RedirectToAction("Index");
+        return RedirectToAction("WaitingCommentList","Comment", new { area = "Admin" });
     }
     public IActionResult ChangeCancel(int id)
     {
         _commentService.TChangeCancel(id);
-        return RedirectToAction("Index");
+        return RedirectToAction("CanceledCommentList", "Comment", new { area = "Admin" });
     }
 
     public IActionResult AcceptedCommentList()

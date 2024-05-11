@@ -19,7 +19,7 @@ public class EfCommentDal : GenericRepository<Comment>, ICommentDal
     {
         using var context = new BlogyDbContext();
         var values = context.Comments.Find(id);
-        if(values != null)
+        if (values != null)
         {
             values.CommentStatus = "İptal Edildi";
             context.Comments.Update(values);
@@ -42,28 +42,37 @@ public class EfCommentDal : GenericRepository<Comment>, ICommentDal
     public List<Comment> GetAcceptedComments()
     {
         using var context = new BlogyDbContext();
-        var values = context.Comments.Where(x => x.CommentStatus == "Onaylandı").ToList();
+        var values = context.Comments.Where(x => x.CommentStatus == "Onaylandı").OrderByDescending(x => x.CommentDate)
+            .ThenByDescending(x => x.CommentTime)
+            .ToList();
         return values;
     }
 
     public List<Comment> GetCanceledComments()
     {
         using var context = new BlogyDbContext();
-        var values = context.Comments.Where(x => x.CommentStatus == "İptal Edildi").ToList();
+        var values = context.Comments.Where(x => x.CommentStatus == "İptal Edildi").OrderByDescending(x => x.CommentDate)
+            .ThenByDescending(x => x.CommentTime)
+            .ToList();
         return values;
     }
 
     public List<Comment> GetCommentsWithArticleId(int id)
     {
         using var context = new BlogyDbContext();
-        var values = context.Comments.Where(x => x.ArticleID  == id).ToList();  
+        var values = context.Comments.Where(x => x.ArticleID == id && x.CommentStatus == "Onaylandı")
+            .OrderByDescending(x => x.CommentDate)
+            .ThenByDescending(x => x.CommentTime)
+            .ToList();
         return values;
     }
 
     public List<Comment> GetWaitingComments()
     {
         using var context = new BlogyDbContext();
-        var values = context.Comments.Where(x => x.CommentStatus == "Onay Bekliyor").ToList();
+        var values = context.Comments.Where(x => x.CommentStatus == "Onay Bekliyor").OrderByDescending(x => x.CommentDate)
+            .ThenByDescending(x => x.CommentTime)
+            .ToList();
         return values;
     }
 }

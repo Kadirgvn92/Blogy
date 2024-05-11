@@ -35,10 +35,11 @@ public class CommentController : Controller
 
         _commentService.TInsert(comment);
         await Task.Delay(2000);
-        return Ok();
-    }
+		return Ok();
+		//return RedirectToAction("Index", "Article", new { id = model.ArticleID });
+	}
 
-    [HttpPost]
+	[HttpPost]
     public IActionResult ReplyToComment(ReplyViewModel model)
     {
         if (ModelState.IsValid)

@@ -3,7 +3,6 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_UILayout.cshtml";
-    int Articleid = Model.ArticleID;
 }
 
 
@@ -14,7 +13,7 @@
                 <div class="post-entry text-center">
                     <h1 class="mb-4">@Model.Title</h1>
                     <div class="post-meta align-items-center text-center">
-                        <figure class="author-figure mb-0 me-3 d-inline-block"><img src="@Model.Writer.ImageUrl" alt="Image" class="img-fluid"></figure>
+                        <figure class="author-figure mb-0 me-3 d-inline-block"><img src="/writerImages/@Model.Writer.ImageUrl" alt="Image" class="img-fluid"></figure>
                         <span class="d-inline-block mt-1">By @Model.Writer.Name</span>
                         <span>&nbsp;-&nbsp; @Model.CreatedDate.ToShortDateString()</span>
                     </div>
@@ -73,7 +72,7 @@
                 <!-- END sidebar-box -->
                 <div class="sidebar-box">
                     <div class="bio text-center">
-                        <img src="@Model.Writer.ImageUrl" alt="Image Placeholder" class="img-fluid mb-3">
+                        <img src="/writerImages/@Model.Writer.ImageUrl" alt="Image Placeholder" class="img-fluid mb-3">
                         <div class="bio-body">
                             <h2>@Model.Writer.Name</h2>
                             <p class="mb-4">@Model.Writer.Description</p>
@@ -117,37 +116,3 @@
     </div>
 </section>
 
-
-<script>
-    $(document).ready(function () {
-        $('#commentForm').submit(function (e) {
-            e.preventDefault(); // Formun normal submit işlemini durdur
-
-            // Form verilerini al
-            var formData = {
-                ArticleID: $('#ArticleID').val(),
-                FullName: $('#name').val(),
-                Email: $('#email').val(),
-                Content: $('#message').val()
-            };
-
-            // Ajax isteği gönder
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("AddComment", "Comment")', // AddComment action'ının url'sini belirtin
-                data: formData,
-                success: function (response) {
-                    // İşlem başarılıysa yapılacak işlemler burada
-                    console.log(response); // İsteğin dönüşünü kontrol etmek için konsola yazdır
-                    alert('Yorum başarıyla eklendi!');
-                    // Yorum eklendikten sonra sayfayı yenileme ya da başka bir işlem yapabilirsiniz
-                },
-                error: function (xhr, status, error) {
-                    // İsteğin başarısız olması durumunda yapılacak işlemler burada
-                    console.error(xhr.responseText); // Hata mesajını konsola yazdır
-                    alert('Yorum eklenirken bir hata oluştu!');
-                }
-            });
-        });
-    });
-</script>

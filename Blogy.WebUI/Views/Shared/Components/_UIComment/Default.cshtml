@@ -1,10 +1,9 @@
-﻿
-@model ResultCommentViewModel
+﻿@model ResultCommentViewModel
 
 <div class="pt-5 comment-wrap" id="CommentList">
     <h3 class="mb-5 heading">Yorumlar (@Model.ArticleCount)</h3>
     <ul class="comment-list">
-        @foreach(var item in Model.Comment)
+        @foreach (var item in Model.Comment)
         {
             <li class="comment">
                 <div class="vcard">
@@ -17,13 +16,13 @@
                 </div>
             </li>
         }
-       
+
     </ul>
     <!-- END comment-list -->
     <div class="comment-form-wrap pt-5" id="AddComment">
         <h3 class="mb-5">Bir Yorum Yazın..</h3>
-        <form method="post" asp-action="AddComment" asp-controller="Comment" class="p-5 bg-light">
-            <input type="hidden" name="ArticleID" value="@Model.ArticleID" />
+        <form method="post" id="CommentForm" asp-action="AddComment" asp-controller="Comment" class="p-5 bg-light">
+            <input type="hidden" id="ArticleID" value="@Model.ArticleID" />
             <div class="form-group">
                 <label for="name">Ad Soyad *</label>
                 <input type="text" class="form-control" required name="FullName" id="name">
@@ -44,15 +43,16 @@
     </div>
 </div>
 
-<div class="pt-5 comment-wrap" id="MessageComment">
-    <p>Yorumunuz incelendikten sonra yayınlanacaktır.</p>
+<div class=" alert alert-success font-weight-bold mt-3 text-xs comment-wrap" style="display:none" id="MessageComment">
+    <h5>Yorumunuz incelendikten sonra yayınlanacaktır.</h5>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" ></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     $(document).ready(function () {
-        $('#commentForm').submit(function (e) {
+        $('#CommentForm').submit(function (e) {
             e.preventDefault(); // Formun normal submit işlemini durdur
 
             // Form verilerini al
@@ -62,7 +62,7 @@
                 Email: $('#email').val(),
                 Content: $('#message').val()
             };
-
+            console.log(formData);
             // Ajax isteği gönder
             $.ajax({
                 type: 'POST',
@@ -91,4 +91,3 @@
         });
     });
 </script>
-

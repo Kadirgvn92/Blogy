@@ -98,10 +98,11 @@
                                 render: function (data, type, row, meta) {
                                     // Veriyi uygun formata dönüştürme
                                     var date = new Date(data);
-                                    var formattedDate = date.getDay() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+                                    var formattedDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
                                     return formattedDate;
                                 }
-                            },
+                            }
+                            ,
                             { data: 'CommentTime', width: '100px' },
                             {
                                 data: 'CommentStatus',
