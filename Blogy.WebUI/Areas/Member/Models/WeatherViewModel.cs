@@ -12,4 +12,5 @@ public class WeatherViewModel
     public string Max { get; set; }
     public string Night { get; set; }
     public string Humidity { get; set; }
+    public List<WeatherViewModel> Weathers { get; set;}
 }

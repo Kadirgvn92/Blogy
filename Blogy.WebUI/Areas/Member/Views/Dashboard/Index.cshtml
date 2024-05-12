@@ -11,7 +11,7 @@
         <div class="card card-calender">
             <div class="card-body">
                 <div class="row pt-4">
-                    @foreach(var item in Model.OrderByDescending(x => x.Day).Take(1))
+                    @foreach(var item in Model.Where(x => x.Date.ToString() == DateTime.Now.ToShortDateString()))
                     {
                         <div class="col-sm-6">
                             <h1 class="text-white">@item.Day</h1>
@@ -22,8 +22,9 @@
 
                         </div>
                         <div class="col-sm-6 text-sm-right pt-3 pt-sm-0">
-                            <h3 class="text-white">@item.Description.ToUpper()</h3>
-                            <h3 class="text-white m-0">@item.Degree °C</h3>
+                            <h3 class="text-white">BURSA</h3>
+                            <h5 class="text-white">@item.Description.ToUpper()</h5>
+                            <h5 class="text-white m-0">@item.Degree °C</h5>
                         </div>
                     }
                     
