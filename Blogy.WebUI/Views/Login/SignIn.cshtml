@@ -94,9 +94,16 @@
                                             <input type="password" required asp-for="Password" class="form-control" placeholder="Şifre" aria-label="Password" aria-describedby="password-addon">
                                             <span asp-validation-for="Password"></span>
                                         </div>
+                                        @if (TempData["ErrorMessage"] != null)
+                                        {
+                                            <div class="alert alert-danger font-weight-bold mt-3 text-xs text-light">
+                                                @TempData["ErrorMessage"]
+                                            </div>
+                                        }
                                         <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Giriş Yap</button>
                                     </form>
                                 </div>
+                                
                                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                     <p class="mb-4 text-sm mx-auto">
                                         Henüz bir hesabın yok mu?

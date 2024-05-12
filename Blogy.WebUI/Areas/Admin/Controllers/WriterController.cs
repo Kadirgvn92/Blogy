@@ -143,9 +143,14 @@ public class WriterController : Controller
             Description = model.Description,
             ImageUrl = model.ImageUrl,
             Name = model.Name,
-            AppUserID = model.AppuserID
+            AppUserID = model.AppuserID,
         };
+
+        var user = await _userManager.FindByNameAsync(User.Identity.Name);
+        user.IsAccepted = true;
+        await _userManager.UpdateAsync(user);
         _writerService.TInsert(writer);
+        
         return RedirectToAction("Index");
     }
 }

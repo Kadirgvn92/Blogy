@@ -20,7 +20,7 @@ public class LoginController : Controller
     [HttpGet]
     public IActionResult SignUp()
     {
-        
+
         return View();
     }
     [HttpPost]
@@ -54,7 +54,7 @@ public class LoginController : Controller
 
         }
 
-        return View();  
+        return View();
     }
     [HttpGet]
     public IActionResult SignIn()
@@ -66,19 +66,29 @@ public class LoginController : Controller
     {
         if (ModelState.IsValid)
         {
-            var result = await _signInManager.PasswordSignInAsync(p.Username, p.Password, false, true);
-            if (result.Succeeded)
+            var user = await _userManager.FindByNameAsync(p.Username);
+            if (user.IsAccepted)
             {
-                return RedirectToAction("Index", "Dashboard", new { area = "Member" });
+                var result = await _signInManager.PasswordSignInAsync(p.Username, p.Password, false, true);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Dashboard", new { area = "Member" });
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Geçersiz Kullanıcı adı veya Şifre. Lütfen tekrar deneyiniz.";
+                    return View();
+                }
             }
             else
             {
-                ViewBag.ErrorMessage = "Geçersiz Kullanıcı adı veya Şifre. Lütfen tekrar deneyiniz.";
+                TempData["ErrorMessage"] = "Hesabınız Onaylanmamıştır. Mailinizi kontrol ediniz";
                 return View();
             }
-        }else
+        }
+        else
         {
-            ViewBag.ErrorMessage = "Lütfen giriş bilgilerinizi doğru şekilde doldurunuz.";
+            TempData["ErrorMessage"] = "Lütfen giriş bilgilerinizi doğru şekilde doldurunuz.";
             return View();
         }
     }

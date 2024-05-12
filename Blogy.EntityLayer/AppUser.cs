@@ -12,5 +12,6 @@ public class AppUser : IdentityUser<int>
     public string Surname { get; set; }
     public string ImageUrl { get; set; }
     public string? Description { get; set; }
+    public bool IsAccepted { get; set; }
     public List<Writer> Writers { get; set; }
 }

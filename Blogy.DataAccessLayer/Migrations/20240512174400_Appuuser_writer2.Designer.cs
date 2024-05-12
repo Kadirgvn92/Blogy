@@ -4,6 +4,7 @@ using Blogy.DataAccessLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blogy.DataAccessLayer.Migrations
 {
     [DbContext(typeof(BlogyDbContext))]
-    partial class BlogyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240512174400_Appuuser_writer2")]
+    partial class Appuuser_writer2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
