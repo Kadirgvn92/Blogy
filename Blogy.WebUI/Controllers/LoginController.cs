@@ -40,7 +40,7 @@ public class LoginController : Controller
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
-                TempData["SuccessMessage"] = "Kayıt başarılı şekilde gerçekleşmiştir.";
+                TempData["SuccessMessage"] = "Kaydınız sistem tarafından onaylandıktan sonra giriş yapabilirsiniz.";
 
                 return RedirectToAction("SignUp");
             }

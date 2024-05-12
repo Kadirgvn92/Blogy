@@ -1,4 +1,6 @@
 ﻿
+@model List<Writer>
+
 @{
     Layout = null;
 }
@@ -96,12 +98,16 @@
 			</div>
 
 			<div class="row">
-				<div class="col-lg-4 mb-4 text-center" data-aos="fade-up" data-aos-delay="0">
-					<img src="/blogy-1.0.0/images/person_1.jpg" alt="Image" class="img-fluid w-50 rounded-circle mb-3">
-					<h5 class="text-black">James Griffin</h5>
-					<p>Bilişim dünyasının gizemli yollarında izler bırakıyor, teknoloji harikalarını keşfetmek için sabırsızlanıyor.</p>
-				</div>
-				<div class="col-lg-4 mb-4 text-center" data-aos="fade-up" data-aos-delay="100">
+				@foreach(var item in Model.Take(6))
+				{
+					<div class="col-lg-4 mb-4 text-center" data-aos="fade-up" data-aos-delay="0">
+						<img src="/writerImages/@item.ImageUrl" alt="Image" style="width:145px;height:200px;object-fit:cover" class="img-fluid w-50 rounded-circle mb-3">
+						<h5 class="text-black">@item.Name</h5>
+						<p>@item.Description</p>
+					</div>
+				}
+				
+			@* 	<div class="col-lg-4 mb-4 text-center" data-aos="fade-up" data-aos-delay="100">
 					<img src="/blogy-1.0.0/images/person_2.jpg" alt="Image" class="img-fluid w-50 rounded-circle mb-3">
 					<h5 class="text-black">Claire Smith</h5>
 					<p>Yeni yazılım dillerini çözmeye, dijital dünyada iz bırakmaya kararlı bir kod ustası.</p>
@@ -126,7 +132,7 @@
 					<img src="/blogy-1.0.0/images/person_2.jpg" alt="Image" class="img-fluid w-50 rounded-circle mb-3">
 					<h5 class="text-black">Shana Clarkson</h5>
 					<p>Bir yazılım arayüzü oluşturmanın yanı sıra, kullanıcı dostu teknolojiler tasarlamak için tutkulu bir mühendis.</p>
-				</div>
+				</div> *@
 			</div>
 
 		</div>

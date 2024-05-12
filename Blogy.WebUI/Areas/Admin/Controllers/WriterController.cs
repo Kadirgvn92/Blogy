@@ -1,7 +1,10 @@
 ﻿using Blogy.BusinessLayer.Abstract;
 using Blogy.EntityLayer;
 using Blogy.WebUI.Areas.Admin.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -12,12 +15,14 @@ namespace Blogy.WebUI.Areas.Admin.Controllers;
 public class WriterController : Controller
 {
     private readonly IWriterService _writerService;
+    private readonly UserManager<AppUser> _userManager;
 
-    public WriterController(IWriterService writerService)
-    {
-        _writerService = writerService;
-    }
-    public string GenerateName()
+	public WriterController(IWriterService writerService, UserManager<AppUser> userManager)
+	{
+		_writerService = writerService;
+		_userManager = userManager;
+	}
+	public string GenerateName()
     {
         string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -108,9 +113,19 @@ public class WriterController : Controller
         return View();
     }
     [HttpGet]
-    public IActionResult CreateWriter()
+    public async Task<IActionResult> CreateWriter()
     {
-        return View();
+		var users = await _userManager.Users.ToListAsync(); // Tüm kullanıcıları al
+
+		List<SelectListItem> userList = users.Select(u => new SelectListItem
+		{
+			Text = u.Name + " "+ u.Surname,
+			Value = u.Id.ToString(),
+		}).ToList();
+
+		ViewBag.UserList = userList;
+		return View();
+
     }
     [HttpPost]
     public async Task<IActionResult> CreateWriter(CreateWriterViewModel model)
@@ -128,6 +143,7 @@ public class WriterController : Controller
             Description = model.Description,
             ImageUrl = model.ImageUrl,
             Name = model.Name,
+            AppUserID = model.AppuserID
         };
         _writerService.TInsert(writer);
         return RedirectToAction("Index");

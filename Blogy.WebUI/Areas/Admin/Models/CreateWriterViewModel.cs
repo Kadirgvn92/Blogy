@@ -7,6 +7,7 @@ public class CreateWriterViewModel
     public string Name { get; set; }
     public string ImageUrl { get; set; }
     public string Description { get; set; }
+    public int AppuserID { get; set; }
 
     public IFormFile Image { get; set; }
 }
