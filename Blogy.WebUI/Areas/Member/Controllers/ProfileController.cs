@@ -27,12 +27,15 @@ public class ProfileController : Controller
         var user = await _userManager.FindByNameAsync(User.Identity.Name);
         var writer = _writerService.TGetWriter(user.Id);
         var count = _articleService.TGetAllArticles().Where(x => x.WriterID == writer.WriterID).Count();
-        var articleIds = _articleService.TGetAll().Select(a => a.ArticleID).ToList();
+        var articles = _articleService.TGetAllArticles().Where(x => x.WriterID == writer.WriterID);
+        var comments = _commentService.TGetAll().Where(x => x.CommentStatus == "Onaylandı");
 
-        // Her makaleye ait yorum sayısını hesaplayın
-        int commentCount = 0;
+        var articleIds = articles.Select(a => a.ArticleID).ToList();
 
-        ViewBag.Comment = commentCounts.Count();
+        // Comments tablosundaki articleID'leri makalelerin articleID'leri ile karşılaştırarak eşleşmeleri bulun
+        var matchingCommentsCount = comments.Count(c => articleIds.Contains(c.ArticleID));
+        
+        ViewBag.Comments = matchingCommentsCount;
         ViewBag.Count = count; 
         ViewBag.Writer = writer.Name;
         ViewBag.Image = writer.ImageUrl;
