@@ -4,8 +4,25 @@
     Layout = "~/Views/Shared/_MemberLayout.cshtml";
 }
 
+
+
 <div class="content-wrapper">
-    <div class="content mt-0 p-2">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1>Blog</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item active">Blog</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <div class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -66,11 +83,11 @@
                                                 <td class="align-middle">
                                                     <span class=" text-s  mb-0">@item.CreatedDate.ToString("dddd, dd MMMM yyyy")</span>
                                                 </td>
-                                                <td width="60px" class="align-middle">
-                                                    <a href="/Member/Blog/DeleteArticle/@item.ArticleID" class="btn bg-gradient-danger ">Sil</a>
+                                                <td width="60px" class="align-middle text-center">
+                                                    <a href="/Member/Blog/DeleteArticle/@item.ArticleID" class="btn bg-danger btn-rounded">Sil</a>
                                                 </td>
-                                                <td width="80px" class="align-middle">
-                                                    <a href="/Member/Blog/UpdateArticle/@item.ArticleID" class="btn bg-gradient-success ">Güncelle</a>
+                                                <td width="80px" class="align-middle text-center">
+                                                    <a href="/Member/Blog/UpdateArticle/@item.ArticleID" class="btn bg-success btn-rounded">Güncelle</a>
                                                 </td>
                                             </tr>
                                         }

@@ -17,15 +17,12 @@
 
             @await Html.PartialAsync("~/Views/LayoutPartials/MemberLayoutPartial/_MemberThemePartial.cshtml")
 
-            @await Html.PartialAsync("~/Views/LayoutPartials/MemberLayoutPartial/_MemberNavbarPartial.cshtml")
+            @await Component.InvokeAsync("_MemberLayoutNavbarPartial")
 
             <div class="main-panel">
 
-                <div class="content-wrapper pb-0">
-
-                    @RenderBody()
-
-                </div>
+                @RenderBody()
+                
                 <footer class="footer">
                     <div class="d-sm-flex justify-content-center justify-content-sm-between">
                         <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>

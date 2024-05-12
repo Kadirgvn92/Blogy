@@ -43,16 +43,18 @@ public class BlogController : Controller
     {
         const int pageSize = 10;
         var user = await _userManager.FindByNameAsync(User.Identity.Name);
+        var writer = _writerService.TGetWriter(user.Id);
+
         var model = new ArticleViewModel
         {
             PageInfo = new PageInfoModel()
             {
-                TotalItems = _articleService.TGetAllArticles().Count(),
+                TotalItems = _articleService.TGetAllArticles().Where(x => x.WriterID == writer.WriterID).Count(),
                 CurrentPage = page,
                 ItemsPerPage = pageSize,
             },
-            Articles = _articleService.TGetAllArticles().OrderByDescending(x => x.CreatedDate).Skip((page - 1) * pageSize).Take(pageSize).ToList(),
-            TotalArticles = _articleService.TGetAllArticles().Count(),
+            Articles = _articleService.TGetAllArticles().Where(x => x.WriterID == writer.WriterID).OrderByDescending(x => x.CreatedDate).Skip((page - 1) * pageSize).Take(pageSize).ToList(),
+            TotalArticles = _articleService.TGetAllArticles().Where(x => x.WriterID == writer.WriterID).Count(),
         };
         return View(model);
     }
@@ -106,7 +108,7 @@ public class BlogController : Controller
     }
     public IActionResult DeleteArticle(int id)
     {
-        _articleService.TDelete(id);
+        _articleService.TDeleteArticle(id);
         return View();
     }
     [HttpGet]

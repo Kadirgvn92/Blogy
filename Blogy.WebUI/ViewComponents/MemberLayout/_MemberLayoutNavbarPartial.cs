@@ -5,27 +5,24 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Blogy.WebUI.ViewComponents.MemberLayout;
 
-public class _MemberLayoutSidebarPartial : ViewComponent
+public class _MemberLayoutNavbarPartial : ViewComponent
 {
     private readonly UserManager<AppUser> _userManager;
     private readonly IWriterService _writerService;
-    private readonly IArticleService _articleService;
 
-    public _MemberLayoutSidebarPartial(UserManager<AppUser> userManager, IWriterService writerService, IArticleService articleService)
+    public _MemberLayoutNavbarPartial(UserManager<AppUser> userManager, IWriterService writerService)
     {
         _userManager = userManager;
         _writerService = writerService;
-        _articleService = articleService;
     }
 
     public async Task<IViewComponentResult> InvokeAsync()
     {
         var user = await _userManager.FindByNameAsync(User.Identity.Name);
         var writer = _writerService.TGetWriter(user.Id);
-        var articles = _articleService.TGetAllArticles().Where(x => x.WriterID == writer.WriterID).Count();
-        ViewBag.Image = writer.ImageUrl;
-        ViewBag.Articles = articles;
-        ViewBag.Writer = writer.Name;
-        return View();
+        ViewBag.Writer = writer.ImageUrl;
+        ViewBag.User = writer.Name;
+
+        return View();  
     }
 }

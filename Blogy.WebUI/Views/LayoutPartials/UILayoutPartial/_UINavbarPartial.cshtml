@@ -5,7 +5,7 @@
 		<div class="menu-bg-wrap">
 			<div class="site-navigation">
 				<div class="row g-0 align-items-center">
-					<div class="col-2">
+					<div class="col-1">
 						<a href="/Default/Index" class="logo m-0 float-start">Blogy<span class="text-primary">.</span></a>
 					</div>
 					<div class="col-7 text-center">
@@ -24,12 +24,16 @@
 							<li><a href="/Contact/Index">İletişim</a></li>
 						</ul>
 					</div>
-					<div class="col-3 text-end">
-						<form asp-action ="Index" asp-controller="Search" method="get" class="search-form d-none d-lg-inline-block" >
+					<div class="col-2 text-end">
+						<form asp-action="Index" asp-controller="Search" method="get" class="search-form d-none d-lg-inline-block">
 							<input class="form-control" name="searchString" value="@ViewData["CurrentFilter"]" placeholder="Yaz ve Enter'a bas..." />
 							<span class="bi-search"></span>
 						</form>
 					</div>
+					<div class="col-2">
+						<a href="/Member/Dashboard" class=" btn btn-light m-0 float-end">Giriş Yap</a>
+					</div>
+					
 				</div>
 			</div>
 		</div>
