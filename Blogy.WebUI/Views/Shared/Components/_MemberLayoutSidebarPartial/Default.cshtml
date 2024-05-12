@@ -7,16 +7,16 @@
     </div>
     <ul class="nav">
         <li class="nav-item nav-profile">
-            <a href="#" class="nav-link">
+            <a href="/Member/Dashboard" class="nav-link">
                 <div class="nav-profile-image">
-                    <img src="~/Breeze/template/assets/images/faces/face1.jpg" alt="profile" />
+                    <img src="/writerImages/person_1.jpg" alt="profile" />
                     <span class="login-status online"></span>
                     <!--change to offline or busy as needed-->
                 </div>
                 <div class="nav-profile-text d-flex flex-column pr-3">
-                    <span class="font-weight-medium mb-2"> OSMAN</span>
+                    <span class="font-weight-medium mb-2"> @ViewBag.Writer</span>
                 </div>
-                <span class="badge badge-danger text-white ml-3 rounded">3</span>
+                <span class="badge badge-danger text-white ml-3 rounded">@ViewBag.Articles</span>
             </a>
         </li>
         <li class="nav-item">
@@ -38,16 +38,11 @@
                 <span class="menu-title">Profile</span>
             </a>
         </li>
-
-        <li class="nav-item sidebar-actions">
-            <div class="nav-link">
-                <div class="mt-4">
-                    <i class="fi fi-sr-sign-out-alt"></i>&ensp;
-                    <p>
-                        Çıkış
-                    </p>
-                </div>
-            </div>
+        <li class="nav-item">
+            <a class="nav-link" href="/Login/LogOut">
+                <i class="fi fi-sr-sign-out-alt"></i>
+                <span class="menu-title">Çıkış</span>
+            </a>
         </li>
     </ul>
 </nav>

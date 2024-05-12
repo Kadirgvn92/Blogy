@@ -10,7 +10,8 @@
 <body>
     <div class="container-scroller">
 
-        @await Html.PartialAsync("~/Views/LayoutPartials/MemberLayoutPartial/_MemberSidebarPartial.cshtml")
+        @await Component.InvokeAsync("_MemberLayoutSidebarPartial")
+        @* @await Html.PartialAsync("~/Views/LayoutPartials/MemberLayoutPartial/_MemberSidebarPartial.cshtml") *@
 
         <div class="container-fluid page-body-wrapper">
 
