@@ -1,4 +1,5 @@
 ﻿using Blogy.BusinessLayer.Abstract;
+using Blogy.DataAccessLayer.Context;
 using Blogy.EntityLayer;
 using Blogy.WebUI.Areas.Admin.Models;
 using Microsoft.AspNetCore.Identity;
@@ -130,6 +131,7 @@ public class WriterController : Controller
     [HttpPost]
     public async Task<IActionResult> CreateWriter(CreateWriterViewModel model)
     {
+        using var context = new BlogyDbContext();
         var resource = Directory.GetCurrentDirectory();
         var extension = Path.GetExtension(model.Image.FileName);
         var imagename = GenerateName() + extension;
@@ -146,10 +148,12 @@ public class WriterController : Controller
             AppUserID = model.AppuserID,
         };
 
-        var user = await _userManager.FindByNameAsync(User.Identity.Name);
+        var user = await _userManager.FindByIdAsync(model.AppuserID.ToString());
         user.IsAccepted = true;
         await _userManager.UpdateAsync(user);
+        await context.SaveChangesAsync();
         _writerService.TInsert(writer);
+        //burada isAccepted true yaptıramıyorum dbde
         
         return RedirectToAction("Index");
     }
