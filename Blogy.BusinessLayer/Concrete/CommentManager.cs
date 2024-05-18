@@ -17,6 +17,11 @@ public class CommentManager : ICommentService
         _commentDal = commentDal;
     }
 
+    public List<Comment> TGetCommentsWithArticles()
+    {
+        return _commentDal.GetCommentsWithArticles();
+    }
+
     public void TChangeCancel(int id)
     {
         _commentDal.ChangeCancel(id);

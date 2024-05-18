@@ -38,6 +38,24 @@ public class DashboardController : Controller
             var responseContent = JsonConvert.DeserializeObject<dynamic>(response.Content);
             var weatherList = new List<WeatherViewModel>();
 
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var writer = _writerService.TGetWriter(user.Id);
+            var count = _articleService.TGetAllArticles().Where(x => x.WriterID == writer.WriterID).Count();
+            var articles = _articleService.TGetAllArticles().Where(x => x.WriterID == writer.WriterID);
+            var comments = _commentService.TGetAll().Where(x => x.CommentStatus == "Onaylandı");
+
+            var articleIds = articles.Select(a => a.ArticleID).ToList();
+
+            // Comments tablosundaki articleID'leri makalelerin articleID'leri ile karşılaştırarak eşleşmeleri bulun
+            var matchingCommentsCount = comments.Count(c => articleIds.Contains(c.ArticleID));
+
+            var matchingComments = comments.Where(c => articleIds.Contains(c.ArticleID)).ToList();
+            ViewBag.Comments = matchingCommentsCount;
+            ViewBag.Count = count;
+            ViewBag.Writer = writer.Name;
+            ViewBag.Image = writer.ImageUrl;
+
+
             foreach (var json in responseContent.result)
             {
                 var model = new WeatherViewModel
@@ -52,28 +70,36 @@ public class DashboardController : Controller
                     Min = json.min,
                     Night = json.night,
                     Status = json.status,
+                    Comments = matchingComments,
                 };
 
                 weatherList.Add(model);
             }
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            var writer = _writerService.TGetWriter(user.Id);
-            var count = _articleService.TGetAllArticles().Where(x => x.WriterID == writer.WriterID).Count();
-            var articles = _articleService.TGetAllArticles().Where(x => x.WriterID == writer.WriterID);
-            var comments = _commentService.TGetAll().Where(x => x.CommentStatus == "Onaylandı");
-
-            var articleIds = articles.Select(a => a.ArticleID).ToList();
-
-            // Comments tablosundaki articleID'leri makalelerin articleID'leri ile karşılaştırarak eşleşmeleri bulun
-            var matchingCommentsCount = comments.Count(c => articleIds.Contains(c.ArticleID));
-
-            ViewBag.Comments = matchingCommentsCount;
-            ViewBag.Count = count;
-            ViewBag.Writer = writer.Name;
-            ViewBag.Image = writer.ImageUrl;
 
             return View(weatherList);
         }
         return View();
+    }
+    [HttpGet]
+    public async Task<IActionResult> GetComments()
+    {
+        var user = await _userManager.FindByNameAsync(User.Identity.Name);
+        var writer = _writerService.TGetWriter(user.Id);
+        var articles = _articleService.TGetAllArticles().Where(x => x.WriterID == writer.WriterID);
+        var comments = _commentService.TGetCommentsWithArticles();
+
+        var articleIds = articles.Select(a => a.ArticleID).ToList();
+        var matchingComments = comments
+       .Where(c => articleIds.Contains(c.ArticleID))
+       .Select(c => new {
+           ArticleTitle = c.Article.Title,
+           FullName = c.FullName, 
+           Content = c.Content,
+           Email = c.Email, 
+           CommentStatus = c.CommentStatus
+       })
+       .ToList();
+
+        return Json(matchingComments);
     }
 }

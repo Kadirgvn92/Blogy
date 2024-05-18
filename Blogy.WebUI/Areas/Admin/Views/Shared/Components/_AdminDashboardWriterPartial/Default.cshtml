@@ -19,12 +19,19 @@
         <!-- /.card-header -->
         <div class="card-body p-0">
             <ul class="users-list clearfix">
-                @foreach(var item in Model)
+                @foreach(var item in Model.OrderBy(x => x.WriterID).Take(8))
                 {
                     <li>
                         <img src="/writerImages/@item.ImageUrl" style="width:145px;height:145px;object-fit:cover" alt="User Image">
                         <a class="users-list-name" href="#">@item.Name</a>
-                        <span class="users-list-date">@item.Description.Substring(0,10)...</span> 
+                        @if(item.Description.Length < 10)
+                        {
+                            <span class="users-list-date">@item.Description</span>
+                        }
+                        else
+                        {
+                            <span class="users-list-date">@item.Description.Substring(0,10)...</span>
+                        }
                     </li>
                 }
                

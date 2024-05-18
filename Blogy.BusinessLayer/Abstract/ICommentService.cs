@@ -16,4 +16,5 @@ public interface ICommentService : IGenericService<Comment>
     public List<Comment> TGetWaitingComments();
     public List<Comment> TGetAcceptedComments();
     public List<Comment> TGetCanceledComments();
+    public List<Comment> TGetCommentsWithArticles();
 }

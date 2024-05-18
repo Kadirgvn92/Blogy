@@ -1,4 +1,6 @@
-﻿namespace Blogy.WebUI.Areas.Member.Models;
+﻿using Blogy.EntityLayer;
+
+namespace Blogy.WebUI.Areas.Member.Models;
 
 public class WeatherViewModel
 {
@@ -13,4 +15,6 @@ public class WeatherViewModel
     public string Night { get; set; }
     public string Humidity { get; set; }
     public List<WeatherViewModel> Weathers { get; set;}
+    public List<Comment> Comments { get; set;}
+
 }

@@ -2,6 +2,7 @@
 using Blogy.DataAccessLayer.Context;
 using Blogy.DataAccessLayer.Repository;
 using Blogy.EntityLayer;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,6 +66,13 @@ public class EfCommentDal : GenericRepository<Comment>, ICommentDal
             .ThenByDescending(x => x.CommentTime)
             .ToList();
         return values;
+    }
+
+    public List<Comment> GetCommentsWithArticles()
+    {
+        using var context = new BlogyDbContext();
+        var values = context.Comments.Include(x => x.Article).ToList();
+        return values;  
     }
 
     public List<Comment> GetWaitingComments()

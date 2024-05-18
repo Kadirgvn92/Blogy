@@ -14,4 +14,5 @@ public interface ICommentDal : IGenericDal<Comment>
     public List<Comment> GetWaitingComments();
     public List<Comment> GetAcceptedComments();
     public List<Comment> GetCanceledComments();
+    public List<Comment> GetCommentsWithArticles();
 }
