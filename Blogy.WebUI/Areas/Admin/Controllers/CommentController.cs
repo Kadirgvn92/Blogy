@@ -24,7 +24,7 @@ public class CommentController : Controller
     public IActionResult GetComment()
     {
         // Comment nesnelerini al
-        var comments = _commentService.TGetAll();
+        var comments = _commentService.TGetAll().OrderBy(x => x.CommentDate);
         // Comment nesnelerini JSON formatına dönüştür
         var jsonComments = JsonConvert.SerializeObject(comments);
         // JSON formatındaki Comment nesnelerini View'e gönder
@@ -44,7 +44,7 @@ public class CommentController : Controller
 
     public IActionResult AcceptedCommentList()
     {
-        var comments = _commentService.TGetAcceptedComments();
+        var comments = _commentService.TGetAcceptedComments().OrderByDescending(x => x.CommentDate);
         return View(comments);
     }
     [HttpGet]

@@ -1,0 +1,116 @@
+﻿
+@model CommentViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MemberLayout.cshtml";
+}
+
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1>Yorumlar</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item active">Yorumlar</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Yorumlar (@Model.TotalArticles)</div>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="card-body p-0">
+                                <div class="mailbox-controls">
+                                    <div class="card-sub">
+                                        Yorumlar kısmını bu sayfada görüntüleyebilir veya güncelleyebilirsiniz.
+                                    </div>
+                                    <div class="float-right">
+                                        @Model.PageInfo.CurrentPage - @Model.PageInfo.ItemsPerPage / @Model.PageInfo.TotalPages()
+                                        <div class="btn-group">
+                                            @if (Model.PageInfo.CurrentPage > 1)
+                                            {
+                                                <a href="/Member/Comment/Index/?page=@(Model.PageInfo.CurrentPage-1)" class="btn btn-default btn-sm"><i class="fas fa-chevron-left"></i> </a>
+                                            }
+                                            @if (Model.PageInfo.CurrentPage < Model.PageInfo.TotalPages())
+                                            {
+                                                <a href="/Member/Comment/Index/?page=@(Model.PageInfo.CurrentPage+1)" class="btn btn-default btn-sm">><i class="fa fa-chevron-right"></i></a>
+                                            }
+                                        </div>
+                                        <!-- /.btn-group -->
+                                    </div>
+                                    <!-- /.float-right -->
+                                </div>
+                                <table class="table align-items-center table-striped mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-uppercase text-primary text-sm font-weight-bolder ">Blog Yazım</th>
+                                            <th class="text-uppercase text-primary text-sm font-weight-bolder ">Ad Soyad</th>
+                                            <th class="text-uppercase text-primary text-sm font-weight-bolder ">Yorum</th>
+                                            <th class="text-uppercase text-primary text-sm font-weight-bolder ">Tarih</th>
+                                            <th class="text-uppercase text-primary text-sm font-weight-bolder ">Durum</th>
+                                            <th class="text-uppercase text-primary text-sm font-weight-bolder ">Sitede Gör</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="border-top">
+                                        @foreach (var item in Model.Comments)
+                                        {
+                                            <tr>
+                                                <td class="align-middle">
+                                                    <p class="text-s  mb-0">@item.Article.Title</p>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <p class="text-s  mb-0">@item.FullName</p>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <span class="text-s  mb-0">@item.Content</span>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <span class=" text-s  mb-0">@item.CommentDate.ToString("dddd, dd MMMM yyyy")</span>
+                                                </td>
+                                                @if(item.CommentStatus == "Onaylandı")
+                                                {
+                                                    <td class="align-middle">
+                                                        <span class=" text-s badge badge-success mb-0">@item.CommentStatus</span>
+                                                    </td>
+                                                }else if(item.CommentStatus == "Onay Bekliyor")
+                                                {
+                                                    <td class="align-middle">
+                                                        <span class=" text-s badge badge-warning mb-0">@item.CommentStatus</span>
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td class="align-middle">
+                                                        <span class=" text-s badge badge-danger mb-0">@item.CommentStatus</span>
+                                                    </td>
+                                                }
+                                                <td width="80px" class="align-middle text-center">
+                                                    <a href="/Article/Index/@item.ArticleID" class="btn bg-success btn-rounded">Sitede Gör</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

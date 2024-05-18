@@ -1,0 +1,81 @@
+﻿
+@model ContactUsViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="content mt-0 p-2">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Mesajlar (@Model.TotalContactUs)</div>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="card-body p-0">
+                                <div class="mailbox-controls">
+                                    <div class="card-sub">
+                                        Gelen mesajları bu sayfada görüntüleyebilir veya güncelleyebilirsiniz.
+                                    </div>
+                                    <div class="float-right">
+                                        @Model.PageInfo.CurrentPage - @Model.PageInfo.ItemsPerPage / @Model.PageInfo.TotalPages()
+                                        <div class="btn-group">
+                                            @if (Model.PageInfo.CurrentPage > 1)
+                                            {
+                                                <a href="/Admin/ContactUs/Index/?page=@(Model.PageInfo.CurrentPage-1)" class="btn btn-default btn-sm"><i class="fas fa-chevron-left"></i> </a>
+                                            }
+                                            @if (Model.PageInfo.CurrentPage < Model.PageInfo.TotalPages())
+                                            {
+                                                <a href="/Admin/ContactUs/Index/?page=@(Model.PageInfo.CurrentPage+1)" class="btn btn-default btn-sm">><i class="fa fa-chevron-right"></i></a>
+                                            }
+                                        </div>
+                                        <!-- /.btn-group -->
+                                    </div>
+                                    <!-- /.float-right -->
+                                </div>
+                                <table class="table align-items-center table-striped mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-uppercase text-primary text-sm font-weight-bolder ">Ad Soyad</th>
+                                            <th class="text-uppercase text-primary text-sm font-weight-bolder ">Konu</th>
+                                            <th class="text-uppercase text-primary text-sm font-weight-bolder ">Mesaj</th>
+                                            <th class="text-uppercase text-primary text-sm font-weight-bolder ">Tarih</th>
+                                            <th class="text-uppercase text-primary text-sm font-weight-bolder text-center">Sil</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="border-top">
+                                        @foreach (var item in Model.Contacts)
+                                        {
+                                            <tr>
+                                                <td class="align-middle">
+                                                    <p class="text-s  mb-0">@item.Name</p>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <span class="text-s  mb-0">@item.Subject</span>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <span class=" text-s  mb-0">@item.MessageBody</span>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <span class=" text-s  mb-0">@item.MessageDate.ToString("dddd, dd MMMM yyyy")</span>
+                                                </td>
+                                                <td width="100px" class="align-middle text-center">
+                                                    <a href="/Admin/Article/DeleteArticle/@item.ContactID" class="btn bg-gradient-danger ">Sil</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

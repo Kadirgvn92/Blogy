@@ -1,10 +1,12 @@
 ﻿using Blogy.BusinessLayer.Abstract;
 using Blogy.EntityLayer;
 using Blogy.WebUI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.NetworkInformation;
 
 namespace Blogy.WebUI.Controllers;
+[AllowAnonymous]
 public class ContactController : Controller
 {
     private readonly IContactService _contactService;

@@ -28,7 +28,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.OrderBy(x => x.CommentDate).Take(5))
+                        @foreach (var item in Model.OrderByDescending(x => x.CommentDate).Take(5))
                         {
                             <tr>
                                 <td>@item.FullName</td>

@@ -87,12 +87,12 @@
                                         <label>Kullanıcı Adı</label>
                                         <div class="mb-3">
                                             <input type="text" required asp-for="Username" class="form-control" placeholder="Kullanıcı Adı">
-                                            <span asp-validation-for="Username"></span>
+                                            
                                         </div>
                                         <label>Şifre</label>
                                         <div class="mb-3">
                                             <input type="password" required asp-for="Password" class="form-control" placeholder="Şifre" aria-label="Password" aria-describedby="password-addon">
-                                            <span asp-validation-for="Password"></span>
+                                            
                                         </div>
                                         @if (TempData["ErrorMessage"] != null)
                                         {

@@ -95,14 +95,17 @@
                             {
                                 data: 'CommentDate',
                                 width: '100px',
-                                render: function (data, type, row, meta) {
-                                    // Veriyi uygun formata dönüştürme
+                                render: function (data, type, row) {
                                     var date = new Date(data);
-                                    var formattedDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
-                                    return formattedDate;
+                                    var formattedDate = date.getDate().toString().padStart(2, '0') + '/' +
+                                        (date.getMonth() + 1).toString().padStart(2, '0') + '/' +
+                                        date.getFullYear();
+                                    if (type === 'display' || type === 'filter') {
+                                        return formattedDate;
+                                    }
+                                    return data; // Sorting uses the original date format
                                 }
-                            }
-                            ,
+                            },
                             { data: 'CommentTime', width: '100px' },
                             {
                                 data: 'CommentStatus',
@@ -142,6 +145,7 @@
                         "lengthChange": false, // Kayıt sayısı seçme alanını kapat
                         "searching": false, // Arama özelliğini devre dışı bırak
                         "ordering": true, // Sıralama özelliğini etkinleştir
+                        "order": [[3], [4]],
                         "info": true, // Tablo bilgi kısmını göster
                         "autoWidth": false, // Otomatik genişlik ayarını devre dışı bırak
                         "responsive": true, // Duyarlılık özelliğini etkinleştir

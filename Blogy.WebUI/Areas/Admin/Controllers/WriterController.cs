@@ -45,7 +45,7 @@ public class WriterController : Controller
     public IActionResult GetWriter()
     {
         // Comment nesnelerini al
-        var comments = _writerService.TGetAll().Where(x => x.IsDeleted == false);
+        var comments = _writerService.TGetAll().Where(x => x.IsDeleted == false && x.Name != "Admin");
         
         // Comment nesnelerini JSON formatına dönüştür
         var jsonComments = JsonConvert.SerializeObject(comments);
