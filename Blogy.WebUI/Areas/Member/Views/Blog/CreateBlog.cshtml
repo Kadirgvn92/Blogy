@@ -43,10 +43,6 @@
                                             @Html.DropDownListFor(x => x.CategoryID, (List<SelectListItem>)ViewBag.c, new { @class = "form-control" })
                                         </div>
                                         <div class="form-group p-1">
-                                            <label>Yazar</label>
-                                            @Html.DropDownListFor(x => x.WriterID, (List<SelectListItem>)ViewBag.w, new { @class = "form-control" })
-                                        </div>
-                                        <div class="form-group p-1">
                                             <label>Başlık</label>
                                             <input type="text" class="form-control form-control-s" asp-for="Title" placeholder="Başlığı girin">
                                         </div>

@@ -72,6 +72,10 @@ public class LoginController : Controller
                 var result = await _signInManager.PasswordSignInAsync(p.Username, p.Password, false, true);
                 if (result.Succeeded)
                 {
+                    if(user.Id == 12) 
+                    {
+                        return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                    }
                     return RedirectToAction("Index", "Dashboard", new { area = "Member" });
                 }
                 else

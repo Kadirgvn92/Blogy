@@ -80,6 +80,10 @@ public class BlogController : Controller
     [HttpPost]
     public async Task<IActionResult> CreateBlog(CreateBlogViewModel model)
     {
+        var user = await _userManager.FindByNameAsync(User.Identity.Name);
+        var writer = _writerService.TGetWriter(user.Id);
+
+
         var resource = Directory.GetCurrentDirectory();
         var extension = Path.GetExtension(model.Image.FileName);
         var imagename = GenerateName() + extension;
@@ -93,7 +97,7 @@ public class BlogController : Controller
         {
             Title = model.Title,
             CategoryID = model.CategoryID,
-            WriterID = model.WriterID,
+            WriterID = writer.WriterID,
             FirstSection = model.FirstSection,
             SecondSection = model.SecondSection,
             ThirdSection = model.ThirdSection,

@@ -42,7 +42,7 @@ public class DashboardController : Controller
             var writer = _writerService.TGetWriter(user.Id);
             var count = _articleService.TGetAllArticles().Where(x => x.WriterID == writer.WriterID).Count();
             var articles = _articleService.TGetAllArticles().Where(x => x.WriterID == writer.WriterID);
-            var comments = _commentService.TGetAll().Where(x => x.CommentStatus == "Onaylandı");
+            var comments = _commentService.TGetAll();
 
             var articleIds = articles.Select(a => a.ArticleID).ToList();
 
